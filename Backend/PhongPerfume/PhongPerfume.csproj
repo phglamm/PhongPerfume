@@ -7,7 +7,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql" Version="9.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTO\BrandDTO\" />
+    <Folder Include="DTO\EventDTO\" />
+    <Folder Include="DTO\WarrantyDTO\" />
+    <Folder Include="DTO\UserDTO\" />
+    <Folder Include="DTO\PerfumeDTO\" />
+    <Folder Include="DTO\PaymentDTO\" />
+    <Folder Include="DTO\OrderDetailPerfumeDTO\" />
+    <Folder Include="DTO\OrderDetailDTO\" />
+    <Folder Include="DTO\OrderDTO\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Validator\" />
   </ItemGroup>
 
 </Project>
