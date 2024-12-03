@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PhongPerfume.Models
+﻿namespace PhongPerfume.DTO.UserDTO
 {
-    public class User
+    public class UserGetAll
     {
-        [Key]
         public int User_Id { get; set; }
         public string Full_Name { get; set; }
         public bool Gender { get; set; }
@@ -15,9 +12,6 @@ namespace PhongPerfume.Models
         public string Password { get; set; }
         public int Reward_point { get; set; }
         public string Role { get; set; }
-        public ICollection<Order> Orders { get; set; }
-
-
-
+        //public ICollection<Order> Orders { get; set; }
     }
 }

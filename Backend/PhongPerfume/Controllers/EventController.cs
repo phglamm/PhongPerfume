@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhongPerfume.Interface;
 
 namespace PhongPerfume.Controllers
 {
     public class EventController : Controller
     {
-        public IActionResult Index()
+        private readonly IEventRepository _eventRepository;
+
+        public EventController(IEventRepository eventRepository)
         {
-            return View();
+            _eventRepository = eventRepository;
         }
     }
 }

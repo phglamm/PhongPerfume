@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhongPerfume.Interface;
 
 namespace PhongPerfume.Controllers
 {
     public class PaymentController : Controller
     {
-        public IActionResult Index()
+        private readonly IPaymentRepository _paymentRepository;
+
+        public PaymentController(IPaymentRepository paymentRepository)
         {
-            return View();
+            _paymentRepository = paymentRepository;
         }
     }
 }

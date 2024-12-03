@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhongPerfume.Interface;
 
 namespace PhongPerfume.Controllers
 {
     public class OrderDetailController : Controller
     {
-        public IActionResult Index()
+        private readonly IOrderDetailRepository _orderDetailRepository;
+
+        public OrderDetailController(IOrderDetailRepository orderDetailRepository)
         {
-            return View();
+            _orderDetailRepository = orderDetailRepository;
         }
     }
 }

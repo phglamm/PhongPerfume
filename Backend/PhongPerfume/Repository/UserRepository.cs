@@ -17,29 +17,41 @@ namespace PhongPerfume.Repository
             return await _context.Users.ToListAsync();
         }
 
-        public Task<User> AddUserAsync(User user)
+        public async Task<User> GetUserByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var selectedUser = await _context.Users.FindAsync(id);
+            return selectedUser;
         }
 
-        public Task DeleteUserAsync(int id)
+        public async Task<User> AddUserAsync(User user)
         {
-            throw new NotImplementedException();
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
-        public Task<User> GetUserByIdAsync(int id)
+        public async Task<User> UpdateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
+
+        public async Task DeleteUserAsync(int id)
+        {
+            var deleteUser = await _context.Users.FindAsync(id);
+            if (deleteUser != null)
+            {
+                _context.Users.Remove(deleteUser);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public User GetUserByUsername(string username)
         {
-            throw new NotImplementedException();
+            return _context.Users.SingleOrDefault(u => u.Username == username);
         }
 
-        public Task<User> UpdateUserAsync(User user)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

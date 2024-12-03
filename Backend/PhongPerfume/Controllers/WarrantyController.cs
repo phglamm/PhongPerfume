@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhongPerfume.Interface;
 
 namespace PhongPerfume.Controllers
 {
     public class WarrantyController : Controller
     {
-        public IActionResult Index()
+        private readonly IWarrantyRepository _warrantyRepository;
+
+        public WarrantyController(IWarrantyRepository warrantyRepository)
         {
-            return View();
+            _warrantyRepository = warrantyRepository;
         }
     }
 }
