@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PhongPerfume.DTO.UserDTO;
 using PhongPerfume.Interface;
 using PhongPerfume.Models;
@@ -8,7 +7,7 @@ namespace PhongPerfume.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -19,7 +18,7 @@ namespace PhongPerfume.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<IEnumerable<UserGetAll>>> GetAllUser()
         {
             var Users = await _userRepository.GetAllUsersAsync();

@@ -1,5 +1,6 @@
 ﻿using PhongPerfume.Data;
 using PhongPerfume.Interface;
+using PhongPerfume.Models;
 
 namespace PhongPerfume.Repository
 {
@@ -12,6 +13,9 @@ namespace PhongPerfume.Repository
             _context = context;
         }
 
-
+        public Task<IEnumerable<OrderItems>> GetAllOrderItemsAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

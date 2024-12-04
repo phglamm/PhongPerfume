@@ -3,44 +3,54 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import axios from "axios";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  Router,
+  RouterProvider,
+} from "react-router-dom";
+import { route } from "./Routes";
+import UserLayout from "./Layouts/UserLayout/UserLayout";
+
+import AdminLayout from "./Layouts/AdminLayout/AdminLayout";
+import Homepage from "./Pages/UserPages/Homepage/Homepage";
+import AboutPage from "./Pages/UserPages/About/AboutPage";
+import UserManagement from "./Pages/AdminPages/UserManagement/UserManagement";
+import PerfumeManagement from "./Pages/AdminPages/PerfumeManagement/PerfumeManagement";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [user, setUser] = useState([]);
+  const router = createBrowserRouter([
+    {
+      path: route.home,
+      element: <UserLayout />,
+      children: [
+        {
+          path: route.home,
+          element: <Homepage />,
+        },
+        {
+          path: route.about,
+          element: <AboutPage />,
+        },
+      ],
+    },
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("https://localhost:7091/api/User");
-      setUser(response.data);
-      console.log(response.data);
-    };
-    fetchData();
-  }, []);
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+    {
+      path: route.admin,
+      element: <AdminLayout />,
+      children: [
+        {
+          path: route.userManagement,
+          element: <UserManagement />,
+        },
+        {
+          path: route.perfumeManagement,
+          element: <PerfumeManagement />,
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
 export default App;
