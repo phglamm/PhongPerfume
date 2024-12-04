@@ -1,6 +1,6 @@
 ﻿namespace PhongPerfume.Interface
 {
-    public interface IOrderDetailPerfumeRepository
+    public interface IOrderItemsRepository
     {
     }
 }

@@ -3,11 +3,11 @@ using PhongPerfume.Interface;
 
 namespace PhongPerfume.Repository
 {
-    public class OrderDetailRepository : IOrderDetailRepository
+    public class OrderItemsRepository : IOrderItemsRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public OrderDetailRepository(ApplicationDbContext context)
+        public OrderItemsRepository(ApplicationDbContext context)
         {
             _context = context;
         }

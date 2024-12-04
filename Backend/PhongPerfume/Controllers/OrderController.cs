@@ -35,7 +35,7 @@ namespace PhongPerfume.Controllers
                 Payment = c.Payment,
                 Warranty_Id = c.Warranty_Id,
                 Warranty = c.Warranty,
-                OrderDetails = c.OrderDetails,
+                OrderItems = c.OrderItems,
 
 
             });
@@ -64,7 +64,7 @@ namespace PhongPerfume.Controllers
                 Payment = selectedOrder.Payment,
                 Warranty_Id = selectedOrder.Warranty_Id,
                 Warranty = selectedOrder.Warranty,
-                OrderDetails = selectedOrder.OrderDetails,
+                OrderItems = selectedOrder.OrderItems,
             };
             return Ok(selectedOrderDTO);
         }

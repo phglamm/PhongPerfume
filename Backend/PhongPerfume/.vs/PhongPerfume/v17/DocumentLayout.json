@@ -3,12 +3,56 @@
   "WorkspaceRootPath": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\models\\perfume.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:models\\perfume.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\models\\orderitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:models\\orderitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Migrations\\20241204090004_update OrderItems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20241204090004_update OrderItems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\dto\\orderdto\\ordergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:dto\\orderdto\\ordergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\repository\\orderitemsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:repository\\orderitemsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\interface\\iorderitemsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:interface\\iorderitemsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\controllers\\orderitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:controllers\\orderitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\interface\\iorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:interface\\iorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\interface\\iwarrantyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,44 +71,12 @@
       "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:controllers\\perfumecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\models\\perfume.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:models\\perfume.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\models\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:models\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\models\\orderdetailperfume.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:models\\orderdetailperfume.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\controllers\\orderdetailperfumecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:controllers\\orderdetailperfumecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\dto\\orderdto\\ordergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:dto\\orderdto\\ordergetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6596753B-2CA7-4E97-854E-969CFDEA5AA8}|PhongPerfume.csproj|c:\\users\\lamph\\onedrive\\desktop\\phongperfume\\backend\\phongperfume\\dto\\eventdto\\eventgetall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -154,11 +166,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "OrderRepository.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Repository\\OrderRepository.cs",
               "RelativeDocumentMoniker": "Repository\\OrderRepository.cs",
@@ -171,33 +183,35 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 6,
               "Title": "OrderGetAll.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\OrderDTO\\OrderGetAll.cs",
               "RelativeDocumentMoniker": "DTO\\OrderDTO\\OrderGetAll.cs",
               "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\OrderDTO\\OrderGetAll.cs",
               "RelativeToolTip": "DTO\\OrderDTO\\OrderGetAll.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA9wBYAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAwwBcAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T07:29:09.86Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 5,
               "Title": "OrderController.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\OrderController.cs",
               "RelativeDocumentMoniker": "Controllers\\OrderController.cs",
               "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\OrderController.cs",
               "RelativeToolTip": "Controllers\\OrderController.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAowEIAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAiwCcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T06:37:01.817Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "IOrderRepository.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IOrderRepository.cs",
               "RelativeDocumentMoniker": "Interface\\IOrderRepository.cs",
@@ -210,6 +224,19 @@
               "EditorCaption": ""
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20241204090004_update OrderItems.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Migrations\\20241204090004_update OrderItems.cs",
+              "RelativeDocumentMoniker": "Migrations\\20241204090004_update OrderItems.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Migrations\\20241204090004_update OrderItems.cs",
+              "RelativeToolTip": "Migrations\\20241204090004_update OrderItems.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T09:00:04.871Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:1366854555:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
             },
@@ -219,19 +246,111 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IUserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IUserRepository.cs",
-              "RelativeDocumentMoniker": "Interface\\IUserRepository.cs",
-              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IUserRepository.cs",
-              "RelativeToolTip": "Interface\\IUserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "OrderItems.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\OrderItems.cs",
+              "RelativeDocumentMoniker": "Models\\OrderItems.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\OrderItems.cs",
+              "RelativeToolTip": "Models\\OrderItems.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:11:34.832Z"
+              "WhenOpened": "2024-12-04T08:02:42.499Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T08:10:13.783Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Perfume.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Perfume.cs",
+              "RelativeDocumentMoniker": "Models\\Perfume.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Perfume.cs",
+              "RelativeToolTip": "Models\\Perfume.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA7wBQAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T14:58:01.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "Models\\Order.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Order.cs",
+              "RelativeToolTip": "Models\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T08:03:36.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAzwBIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T08:47:59.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "OrderItemsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Repository\\OrderItemsRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\OrderItemsRepository.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Repository\\OrderItemsRepository.cs",
+              "RelativeToolTip": "Repository\\OrderItemsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T08:47:26.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IOrderItemsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IOrderItemsRepository.cs",
+              "RelativeDocumentMoniker": "Interface\\IOrderItemsRepository.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IOrderItemsRepository.cs",
+              "RelativeToolTip": "Interface\\IOrderItemsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T08:48:21.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "OrderItemsController.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\OrderItemsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\OrderItemsController.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\OrderItemsController.cs",
+              "RelativeToolTip": "Controllers\\OrderItemsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T08:37:16.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "IWarrantyRepository.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IWarrantyRepository.cs",
               "RelativeDocumentMoniker": "Interface\\IWarrantyRepository.cs",
@@ -243,20 +362,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 14,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Interface\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IUserRepository.cs",
+              "RelativeToolTip": "Interface\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T08:11:34.832Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Repository\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repository\\UserRepository.cs",
               "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Repository\\UserRepository.cs",
               "RelativeToolTip": "Repository\\UserRepository.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAA4wEEAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAA4wDwAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T08:11:52.669Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 15,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -268,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 16,
               "Title": "PerfumeController.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\PerfumeController.cs",
               "RelativeDocumentMoniker": "Controllers\\PerfumeController.cs",
@@ -280,19 +411,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Perfume.cs",
-              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Perfume.cs",
-              "RelativeDocumentMoniker": "Models\\Perfume.cs",
-              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Perfume.cs",
-              "RelativeToolTip": "Models\\Perfume.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T14:58:01.201Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 17,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -304,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 18,
               "Title": "AuthenticationController.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\AuthenticationController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthenticationController.cs",
@@ -316,67 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:10:13.783Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "OrderDetail.cs",
-              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\OrderDetail.cs",
-              "RelativeDocumentMoniker": "Models\\OrderDetail.cs",
-              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\OrderDetail.cs",
-              "RelativeToolTip": "Models\\OrderDetail.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAwAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:02:42.499Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "OrderDetailPerfume.cs",
-              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\OrderDetailPerfume.cs",
-              "RelativeDocumentMoniker": "Models\\OrderDetailPerfume.cs",
-              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\OrderDetailPerfume.cs",
-              "RelativeToolTip": "Models\\OrderDetailPerfume.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:03:51.271Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "OrderDetailPerfumeController.cs",
-              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\OrderDetailPerfumeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\OrderDetailPerfumeController.cs",
-              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\OrderDetailPerfumeController.cs",
-              "RelativeToolTip": "Controllers\\OrderDetailPerfumeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:05:49.94Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "Models\\Order.cs",
-              "ToolTip": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Order.cs",
-              "RelativeToolTip": "Models\\Order.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAywB8AAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T08:03:36.302Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "OrderPost.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\OrderDTO\\OrderPost.cs",
               "RelativeDocumentMoniker": "DTO\\OrderDTO\\OrderPost.cs",
@@ -388,7 +447,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "EventController.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\EventController.cs",
               "RelativeDocumentMoniker": "Controllers\\EventController.cs",
@@ -400,7 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "EventGetAll.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\EventDTO\\EventGetAll.cs",
               "RelativeDocumentMoniker": "DTO\\EventDTO\\EventGetAll.cs",
@@ -412,7 +471,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "WarrantyPost.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\WarrantyDTO\\WarrantyPost.cs",
               "RelativeDocumentMoniker": "DTO\\WarrantyDTO\\WarrantyPost.cs",
@@ -424,7 +483,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "WarrantyGetAll.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\WarrantyDTO\\WarrantyGetAll.cs",
               "RelativeDocumentMoniker": "DTO\\WarrantyDTO\\WarrantyGetAll.cs",
@@ -436,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "WarrantyRepository.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Repository\\WarrantyRepository.cs",
               "RelativeDocumentMoniker": "Repository\\WarrantyRepository.cs",
@@ -448,7 +507,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "Warranty.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Warranty.cs",
               "RelativeDocumentMoniker": "Models\\Warranty.cs",
@@ -460,7 +519,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "PaymentPost.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\PaymentDTO\\PaymentPost.cs",
               "RelativeDocumentMoniker": "DTO\\PaymentDTO\\PaymentPost.cs",
@@ -472,7 +531,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "Payment.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Payment.cs",
               "RelativeDocumentMoniker": "Models\\Payment.cs",
@@ -484,7 +543,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "EventPost.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\EventDTO\\EventPost.cs",
               "RelativeDocumentMoniker": "DTO\\EventDTO\\EventPost.cs",
@@ -496,7 +555,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "BrandGetAll.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\BrandDTO\\BrandGetAll.cs",
               "RelativeDocumentMoniker": "DTO\\BrandDTO\\BrandGetAll.cs",
@@ -508,7 +567,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "Event.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Event.cs",
               "RelativeDocumentMoniker": "Models\\Event.cs",
@@ -520,7 +579,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "BrandController.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Controllers\\BrandController.cs",
               "RelativeDocumentMoniker": "Controllers\\BrandController.cs",
@@ -532,7 +591,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "BrandRepository.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Repository\\BrandRepository.cs",
               "RelativeDocumentMoniker": "Repository\\BrandRepository.cs",
@@ -544,7 +603,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 35,
               "Title": "PerfumeGetAll.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\PerfumeDTO\\PerfumeGetAll.cs",
               "RelativeDocumentMoniker": "DTO\\PerfumeDTO\\PerfumeGetAll.cs",
@@ -556,7 +615,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "IBrandRepository.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Interface\\IBrandRepository.cs",
               "RelativeDocumentMoniker": "Interface\\IBrandRepository.cs",
@@ -568,7 +627,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 37,
               "Title": "BrandPost.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\BrandDTO\\BrandPost.cs",
               "RelativeDocumentMoniker": "DTO\\BrandDTO\\BrandPost.cs",
@@ -580,7 +639,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 38,
               "Title": "PerfumePost.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\DTO\\PerfumeDTO\\PerfumePost.cs",
               "RelativeDocumentMoniker": "DTO\\PerfumeDTO\\PerfumePost.cs",
@@ -592,7 +651,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "Brand.cs",
               "DocumentMoniker": "C:\\Users\\lamph\\OneDrive\\Desktop\\PhongPerfume\\Backend\\PhongPerfume\\Models\\Brand.cs",
               "RelativeDocumentMoniker": "Models\\Brand.cs",

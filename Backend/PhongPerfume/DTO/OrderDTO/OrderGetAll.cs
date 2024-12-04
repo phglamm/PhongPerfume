@@ -23,6 +23,6 @@ namespace PhongPerfume.DTO.OrderDTO
         public int Warranty_Id { get; set; }
         public Warranty Warranty { get; set; }
 
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<OrderItems> OrderItems { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace PhongPerfume.Models
         [ForeignKey("Brand_Id")]
         public Brand Brand { get; set; }
 
-        public ICollection<OrderDetailPerfume> OrderDetailPerfumes { get; set; }
+        public ICollection<OrderItems> OrderItems { get; set; }
 
 
     }

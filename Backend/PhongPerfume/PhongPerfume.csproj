@@ -26,8 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\OrderDetailPerfumeDTO\" />
-    <Folder Include="DTO\OrderDetailDTO\" />
+    <Folder Include="DTO\OrderItemsDTO\" />
     <Folder Include="Migrations\" />
     <Folder Include="Validator\" />
   </ItemGroup>

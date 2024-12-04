@@ -18,8 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IBrandRepository, BrandRepository>(); // For scoped lifetime
 builder.Services.AddScoped<IEventRepository, EventRepository>(); // For scoped lifetime
-builder.Services.AddScoped<IOrderDetailPerfumeRepository, OrderDetailPerfumeRepository>(); // For scoped lifetime
-builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>(); // For scoped lifetime
+builder.Services.AddScoped<IOrderItemsRepository, OrderItemsRepository>(); // For scoped lifetime
 builder.Services.AddScoped<IOrderRepository, OrderRepository>(); // For scoped lifetime
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>(); // For scoped lifetime
 builder.Services.AddScoped<IPerfumeRepository, PerfumeRepository>(); // For scoped lifetime
