@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PhongPerfume.DTO.PerfumeDTO;
 using PhongPerfume.Interface;
 using PhongPerfume.Models;
@@ -7,7 +8,7 @@ namespace PhongPerfume.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class PerfumeController : Controller
     {
         private readonly IPerfumeRepository _perfumeRepository;
@@ -85,7 +86,7 @@ namespace PhongPerfume.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<PerfumePost>> UpdatePerfume(int id, [FromBody] PerfumePost perfumePost)
+        public async Task<ActionResult<Perfume>> UpdatePerfume(int id, [FromBody] PerfumePost perfumePost)
         {
             var ToUpdatePerfume = await _perfumeRepository.GetPerfumeByIdAsync(id);
             if (ToUpdatePerfume == null)

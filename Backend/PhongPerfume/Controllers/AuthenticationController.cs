@@ -26,7 +26,13 @@ public class AuthenticationController : ControllerBase
         // Kiểm tra thông tin đăng nhập
         if (ValidateUser(userLogin))
         {
-            var token = GenerateToken(userLogin.Username);
+            var userRole = _userRepository.GetRoleByUsername(userLogin.Username);
+            if (string.IsNullOrEmpty(userRole))
+            {
+                return Unauthorized("User's role not found");
+            }
+
+            var token = GenerateToken(userLogin.Username, userRole);
             return Ok(new { token });
         }
 
@@ -49,14 +55,15 @@ public class AuthenticationController : ControllerBase
 
     }
 
-    private string GenerateToken(string username)
+    private string GenerateToken(string username, string role)
     {
         // Tạo danh sách Claims (Thông tin người dùng)
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, username),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.Role, "Admin") // Thêm vai trò nếu cần
+            new Claim(ClaimTypes.Role, role) // Thêm vai trò nếu cần
+            
         };
 
         // Lấy Secret Key từ cấu hình

@@ -4,7 +4,7 @@ namespace PhongPerfume.Interface
 {
     public interface IWarrantyRepository
     {
-        Task<IEnumerable<Warranty>> GetAllPerfumesAsync();
+        Task<IEnumerable<Warranty>> GetAllWarrantysAsync();
         Task<Warranty> GetWarrantyByIdAsync(int id);
         Task<Warranty> AddWarrantyAsync(Warranty warranty);
         Task<Warranty> UpdateWarrantyAsync(Warranty warranty);

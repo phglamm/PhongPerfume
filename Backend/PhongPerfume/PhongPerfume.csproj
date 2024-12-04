@@ -26,12 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\EventDTO\" />
-    <Folder Include="DTO\WarrantyDTO\" />
-    <Folder Include="DTO\PaymentDTO\" />
     <Folder Include="DTO\OrderDetailPerfumeDTO\" />
     <Folder Include="DTO\OrderDetailDTO\" />
-    <Folder Include="DTO\OrderDTO\" />
     <Folder Include="Migrations\" />
     <Folder Include="Validator\" />
   </ItemGroup>

@@ -10,5 +10,6 @@ namespace PhongPerfume.Interface
         Task<User> UpdateUserAsync(User user);
         Task DeleteUserAsync(int id);
         User GetUserByUsername(string username);
+        String GetRoleByUsername(string username);
     }
 }

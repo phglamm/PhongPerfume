@@ -52,6 +52,18 @@ namespace PhongPerfume.Repository
             return _context.Users.SingleOrDefault(u => u.Username == username);
         }
 
-
+        public string GetRoleByUsername(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                throw new ArgumentException("Username cannot be null or empty", nameof(username));
+            }
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null)
+            {
+                throw new InvalidOperationException($"User with username '{username}' not found.");
+            }
+            return user.Role;
+        }
     }
 }

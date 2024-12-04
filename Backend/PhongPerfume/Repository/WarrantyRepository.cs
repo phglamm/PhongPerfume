@@ -32,7 +32,7 @@ namespace PhongPerfume.Repository
             }
         }
 
-        public async Task<IEnumerable<Warranty>> GetAllPerfumesAsync()
+        public async Task<IEnumerable<Warranty>> GetAllWarrantysAsync()
         {
             return await _context.Warrantys.ToListAsync();
         }
