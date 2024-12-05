@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhongPerfume.Data;
+using PhongPerfume.DTO.UserDTO;
 using PhongPerfume.Interface;
 using PhongPerfume.Models;
 
@@ -47,9 +48,32 @@ namespace PhongPerfume.Repository
             }
         }
 
-        public User GetUserByUsername(string username)
+        public UserGetAll GetUserByUsername(string username)
+
         {
-            return _context.Users.SingleOrDefault(u => u.Username == username);
+            if (string.IsNullOrEmpty(username))
+            {
+                throw new ArgumentException("Username cannot be null or empty", nameof(username));
+            }
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null)
+            {
+                throw new InvalidOperationException($"User with username '{username}' not found.");
+            }
+            var userDTO = new UserGetAll
+            {
+                User_Id = user.User_Id,
+                Full_Name = user.Full_Name,
+                Gender = user.Gender,
+                Phone = user.Phone,
+                Email = user.Email,
+                Address = user.Address,
+                Username = user.Username,
+                Password = user.Password,
+                Role = user.Role,
+            };
+
+            return userDTO;
         }
 
         public string GetRoleByUsername(string username)
@@ -65,5 +89,7 @@ namespace PhongPerfume.Repository
             }
             return user.Role;
         }
+
+
     }
 }

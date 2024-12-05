@@ -1,14 +1,5 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import axios from "axios";
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  Router,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { route } from "./Routes";
 import UserLayout from "./Layouts/UserLayout/UserLayout";
 
@@ -17,6 +8,10 @@ import Homepage from "./Pages/UserPages/Homepage/Homepage";
 import AboutPage from "./Pages/UserPages/About/AboutPage";
 import UserManagement from "./Pages/AdminPages/UserManagement/UserManagement";
 import PerfumeManagement from "./Pages/AdminPages/PerfumeManagement/PerfumeManagement";
+import LoginPage from "./Pages/UserPages/LoginPage/LoginPage";
+import RegisterPage from "./Pages/RegisterPage/RegisterPage";
+import BrandManagement from "./Pages/AdminPages/BrandManagement/BrandManagement";
+import ProtectedRoute from "./Routes/ProtectedRoute";
 
 function App() {
   const router = createBrowserRouter([
@@ -32,20 +27,48 @@ function App() {
           path: route.about,
           element: <AboutPage />,
         },
+        {
+          path: route.login,
+          element: <LoginPage />,
+        },
+        {
+          path: route.register,
+          element: <RegisterPage />,
+        },
       ],
     },
 
     {
       path: route.admin,
-      element: <AdminLayout />,
+      element: (
+        <ProtectedRoute roles={["admin"]}>
+          <AdminLayout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: route.userManagement,
-          element: <UserManagement />,
+          element: (
+            <ProtectedRoute roles={["admin"]}>
+              <UserManagement />
+            </ProtectedRoute>
+          ),
         },
         {
           path: route.perfumeManagement,
-          element: <PerfumeManagement />,
+          element: (
+            <ProtectedRoute roles={["admin"]}>
+              <PerfumeManagement />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: route.brandManagement,
+          element: (
+            <ProtectedRoute roles={["admin"]}>
+              <BrandManagement />,
+            </ProtectedRoute>
+          ),
         },
       ],
     },

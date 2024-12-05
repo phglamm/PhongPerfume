@@ -16,6 +16,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AuthenticationController",
+    "Method": "Register",
+    "RelativePath": "api/Authentication/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userRegister",
+        "Type": "PhongPerfume.DTO.UserDTO.UserRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PhongPerfume.DTO.UserDTO.UserRegister",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "PhongPerfume.Controllers.BrandController",
     "Method": "GetAllBrand",
     "RelativePath": "api/Brand",

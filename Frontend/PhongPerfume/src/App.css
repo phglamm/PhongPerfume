@@ -1,0 +1,12 @@
+/* Override Ant Design's Link color and text decoration */
+.ant-menu-item a,
+.ant-menu-submenu-title a {
+  color: inherit !important; /* Inherit color from the parent */
+  text-decoration: none !important; /* Remove underline */
+}
+
+.ant-menu-item a:hover,
+.ant-menu-submenu-title a:hover {
+  color: inherit !important; /* Maintain color on hover */
+  text-decoration: none !important; /* Remove underline on hover */
+}

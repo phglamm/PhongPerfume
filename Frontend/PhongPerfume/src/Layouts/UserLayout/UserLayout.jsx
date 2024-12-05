@@ -1,14 +1,19 @@
 import React from "react";
-import Header from "../../Components/Header/Header";
 import { Outlet } from "react-router-dom";
-import Footer from "../../Components/Footer/Footer";
+import HeaderComponent from "../../Components/Header/HeaderComponent";
+import FooterComponent from "../../Components/Footer/FooterComponent";
+import { Container } from "react-bootstrap";
 
 export default function UserLayout() {
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <Container fluid>
+        <Container>
+          <HeaderComponent />
+          <Outlet />
+        </Container>
+        <FooterComponent />
+      </Container>
     </>
   );
 }

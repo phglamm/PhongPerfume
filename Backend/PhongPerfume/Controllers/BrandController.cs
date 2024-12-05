@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PhongPerfume.DTO.BrandDTO;
 using PhongPerfume.Interface;
 using PhongPerfume.Models;
@@ -7,7 +8,7 @@ namespace PhongPerfume.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class BrandController : Controller
     {
         private readonly IBrandRepository _brandRepository;
@@ -18,6 +19,8 @@ namespace PhongPerfume.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
+
         public async Task<ActionResult<IEnumerable<Brand>>> GetAllBrand()
         {
             var Brands = await _brandRepository.GetAllBrandsAsync();

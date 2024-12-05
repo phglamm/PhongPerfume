@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using PhongPerfume.DTO.UserDTO;
 using PhongPerfume.Interface;
+using PhongPerfume.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -26,17 +27,42 @@ public class AuthenticationController : ControllerBase
         // Kiểm tra thông tin đăng nhập
         if (ValidateUser(userLogin))
         {
-            var userRole = _userRepository.GetRoleByUsername(userLogin.Username);
-            if (string.IsNullOrEmpty(userRole))
+            var user = _userRepository.GetUserByUsername(userLogin.Username);
+            if (string.IsNullOrEmpty(user.Role))
             {
                 return Unauthorized("User's role not found");
             }
 
-            var token = GenerateToken(userLogin.Username, userRole);
-            return Ok(new { token });
+            var token = GenerateToken(userLogin.Username, user.Role);
+            return Ok(new { token, user });
         }
 
         return Unauthorized();
+    }
+    [HttpPost("Register")]
+    public async Task<ActionResult<UserRegister>> Register([FromBody] UserRegister userRegister)
+    {
+        if (userRegister == null)
+        {
+            return BadRequest("User's Data is required");
+        }
+
+        var addUser = new User
+        {
+            Full_Name = userRegister.Full_Name,
+            Gender = userRegister.Gender,
+            Phone = userRegister.Phone,
+            Email = userRegister.Email,
+            Address = userRegister.Address,
+            Username = userRegister.Username,
+            Password = userRegister.Password,
+            Reward_point = userRegister.Reward_point,
+            Role = userRegister.Role,
+        };
+
+        var addedUser = await _userRepository.AddUserAsync(addUser);
+        System.Diagnostics.Debug.WriteLine($"{addedUser.User_Id}");
+        return Ok(new { addedUser });
     }
 
     private bool ValidateUser(UserLogin userLogin)
