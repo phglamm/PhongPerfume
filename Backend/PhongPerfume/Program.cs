@@ -1,3 +1,5 @@
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -95,6 +97,10 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+FirebaseApp.Create(new AppOptions
+{
+    Credential = GoogleCredential.FromFile("keys/serviceAccountKey.json")
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

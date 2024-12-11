@@ -15,6 +15,9 @@ namespace PhongPerfume.Models
         public string Password { get; set; }
         public int Reward_point { get; set; }
         public string Role { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiry { get; set; }
+
         public ICollection<Order> Orders { get; set; }
 
 

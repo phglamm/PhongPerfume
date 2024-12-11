@@ -19,6 +19,7 @@ import { Grid } from "antd";
 const { Header } = Layout;
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
+import "./HeaderComponent.scss";
 export default function HeaderComponent() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -51,11 +52,21 @@ export default function HeaderComponent() {
     const userItems = user
       ? [
           getItem(user.username, user.username, <UserOutlined />, [
-            getItem("Profile", `${user.username}/profile`, <UserOutlined />),
-            getItem("Cart", `${user.username}/cart`, <ShoppingCartOutlined />),
+            getItem(
+              "Profile",
+              `${user.username}/${route.profile}`,
+              <UserOutlined />
+            ),
+            getItem(
+              "Cart",
+              `${user.username}/${route.cart}`,
+              <ShoppingCartOutlined />
+            ),
           ]),
           getItem("Logout", "/logout", <LogoutOutlined />, null, () => {
-            localStorage.removeItem("token");
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+
             dispatch(logout());
           }),
         ]
@@ -91,46 +102,48 @@ export default function HeaderComponent() {
   };
 
   return (
-    <Header
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        backgroundColor: "white",
-        padding: screens.md ? "0 50px" : "0 20px",
-      }}
-    >
-      <Title
-        level={screens.md ? 4 : 5}
+    <>
+      <Header
         style={{
-          margin: 0,
-          color: "#8e44ad",
-          flex: screens.md ? "0 1 auto" : "1",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          backgroundColor: "white",
+          padding: screens.md ? "0 50px" : "0 20px",
         }}
       >
-        Perfume Paradise
-      </Title>
-      {screens.md ? (
-        <Menu
-          mode="horizontal"
-          selectedKeys={[selectedKey]}
-          onClick={handleMenuClick}
+        <Title
+          level={screens.md ? 4 : 5}
           style={{
-            flexGrow: 1,
-            justifyContent: "end",
-            backgroundColor: "transparent",
-            borderBottom: "none",
+            margin: 0,
+            color: "#dc0719",
+            flex: screens.md ? "0 1 auto" : "1",
           }}
-          items={items}
-        />
-      ) : (
-        <Dropdown
-          menu={{ items, onClick: handleMenuClick }}
-          trigger={["click"]}
         >
-          <Button icon={<MenuOutlined />} />
-        </Dropdown>
-      )}
-    </Header>
+          Perfume Paradise
+        </Title>
+        {screens.md ? (
+          <Menu
+            mode="horizontal"
+            selectedKeys={[selectedKey]}
+            onClick={handleMenuClick}
+            style={{
+              flexGrow: 1,
+              justifyContent: "end",
+              backgroundColor: "transparent",
+              borderBottom: "none",
+            }}
+            items={items}
+          />
+        ) : (
+          <Dropdown
+            menu={{ items, onClick: handleMenuClick }}
+            trigger={["click"]}
+          >
+            <Button icon={<MenuOutlined />} />
+          </Dropdown>
+        )}
+      </Header>
+    </>
   );
 }

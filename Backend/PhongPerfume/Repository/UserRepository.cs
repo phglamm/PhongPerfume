@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhongPerfume.Data;
-using PhongPerfume.DTO.UserDTO;
 using PhongPerfume.Interface;
 using PhongPerfume.Models;
 
@@ -48,19 +47,19 @@ namespace PhongPerfume.Repository
             }
         }
 
-        public UserGetAll GetUserByUsername(string username)
+        public User GetUserByUsername(string username)
 
         {
             if (string.IsNullOrEmpty(username))
             {
                 throw new ArgumentException("Username cannot be null or empty", nameof(username));
             }
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            var user = _context.Users.AsNoTracking().FirstOrDefault(u => u.Username == username);
             if (user == null)
             {
                 throw new InvalidOperationException($"User with username '{username}' not found.");
             }
-            var userDTO = new UserGetAll
+            var userDTO = new User
             {
                 User_Id = user.User_Id,
                 Full_Name = user.Full_Name,
@@ -71,6 +70,8 @@ namespace PhongPerfume.Repository
                 Username = user.Username,
                 Password = user.Password,
                 Role = user.Role,
+                RefreshToken = user.RefreshToken,
+                RefreshTokenExpiry = user.RefreshTokenExpiry,
             };
 
             return userDTO;
@@ -90,6 +91,60 @@ namespace PhongPerfume.Repository
             return user.Role;
         }
 
+        public User GetUserByEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("email cannot be null or empty", nameof(email));
+            }
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null)
+            {
+                throw new InvalidOperationException($"User with email '{email}' not found.");
+            }
+            var userDTO = new User
+            {
+                User_Id = user.User_Id,
+                Full_Name = user.Full_Name,
+                Gender = user.Gender,
+                Phone = user.Phone,
+                Email = user.Email,
+                Address = user.Address,
+                Username = user.Username,
+                Password = user.Password,
+                Role = user.Role,
+            };
 
+            return userDTO;
+        }
+
+        public User GetUserByRefreshToken(string refreshToken)
+        {
+            if (string.IsNullOrEmpty(refreshToken))
+            {
+                throw new ArgumentException("refreshToken cannot be null or empty", nameof(refreshToken));
+            }
+            var user = _context.Users.AsNoTracking().FirstOrDefault(u => u.RefreshToken == refreshToken);
+            if (user == null)
+            {
+                throw new InvalidOperationException($"User with refreshToken '{refreshToken}' not found.");
+            }
+            var userDTO = new User
+            {
+                User_Id = user.User_Id,
+                Full_Name = user.Full_Name,
+                Gender = user.Gender,
+                Phone = user.Phone,
+                Email = user.Email,
+                Address = user.Address,
+                Username = user.Username,
+                Password = user.Password,
+                Role = user.Role,
+                RefreshToken = user.RefreshToken,
+                RefreshTokenExpiry = user.RefreshTokenExpiry,
+            };
+
+            return userDTO;
+        }
     }
 }

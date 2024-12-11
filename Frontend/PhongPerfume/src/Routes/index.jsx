@@ -7,7 +7,8 @@ export const route = {
   contact: "contact",
   shop: "shop",
   notfound: "not-found",
-
+  perfumes: "perfumes",
+  cart: "cart",
   admin: "/admin",
   userManagement: "user-management",
   perfumeManagement: "perfume-management",

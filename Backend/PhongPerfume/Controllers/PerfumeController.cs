@@ -52,6 +52,32 @@ namespace PhongPerfume.Controllers
                 Perfume_Description = selectedPerfume.Perfume_Description,
                 Perfume_Type = selectedPerfume.Perfume_Type,
                 Perfume_images = selectedPerfume.Perfume_images,
+                Size = selectedPerfume.Size,
+                Stocks = selectedPerfume.Stocks,
+                Price = selectedPerfume.Price,
+                Brand_Id = selectedPerfume.Brand_Id,
+                Brand_Name = selectedPerfume.Brand.Brand_Name
+
+            };
+            return Ok(selectedPerfumeDTO);
+        }
+
+        [HttpGet("PerfumeWithBrandName/{id}")]
+        public async Task<ActionResult<PerfumeGetAll>> GetPerfumeWithBrandNameById(int id)
+        {
+            var selectedPerfume = await _perfumeRepository.GetPerfumeWithBrandNameByIdAsync(id);
+            if (selectedPerfume == null)
+            {
+                return NotFound($"Cannot find User with ID:{id}");
+            }
+            var selectedPerfumeDTO = new PerfumeGetAll
+            {
+                Perfume_Id = selectedPerfume.Perfume_Id,
+                Perfume_Name = selectedPerfume.Perfume_Name,
+                Perfume_Description = selectedPerfume.Perfume_Description,
+                Perfume_Type = selectedPerfume.Perfume_Type,
+                Perfume_images = selectedPerfume.Perfume_images,
+                Size = selectedPerfume.Size,
                 Stocks = selectedPerfume.Stocks,
                 Price = selectedPerfume.Price,
                 Brand_Id = selectedPerfume.Brand_Id,
@@ -75,6 +101,7 @@ namespace PhongPerfume.Controllers
                 Perfume_Description = perfumePost.Perfume_Description,
                 Perfume_Type = perfumePost.Perfume_Type,
                 Perfume_images = perfumePost.Perfume_images,
+                Size = perfumePost.Size,
                 Stocks = perfumePost.Stocks,
                 Price = perfumePost.Price,
                 Brand_Id = perfumePost.Brand_Id,
@@ -102,6 +129,7 @@ namespace PhongPerfume.Controllers
             ToUpdatePerfume.Perfume_Description = perfumePost.Perfume_Description;
             ToUpdatePerfume.Perfume_Type = perfumePost.Perfume_Type;
             ToUpdatePerfume.Perfume_images = perfumePost.Perfume_images;
+            ToUpdatePerfume.Size = perfumePost.Size;
             ToUpdatePerfume.Stocks = perfumePost.Stocks;
             ToUpdatePerfume.Price = perfumePost.Price;
             ToUpdatePerfume.Brand_Id = perfumePost.Brand_Id;

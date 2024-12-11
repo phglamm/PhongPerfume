@@ -17,6 +17,38 @@
   },
   {
     "ContainingType": "AuthenticationController",
+    "Method": "LoginGoogleAsync",
+    "RelativePath": "api/Authentication/loginGoogle",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "googleToken",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthenticationController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/Authentication/refresh-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "refreshToken",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthenticationController",
     "Method": "Register",
     "RelativePath": "api/Authentication/Register",
     "HttpMethod": "POST",
@@ -635,6 +667,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PhongPerfume.Controllers.PerfumeController",
+    "Method": "GetPerfumeWithBrandNameById",
+    "RelativePath": "api/Perfume/PerfumeWithBrandName/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PhongPerfume.DTO.PerfumeDTO.PerfumeGetAll",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "PhongPerfume.Controllers.UserController",

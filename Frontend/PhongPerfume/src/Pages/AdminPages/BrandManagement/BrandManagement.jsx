@@ -1,13 +1,14 @@
 import { Button, Form, Input, Modal, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import api from "../../../Config/Api";
 import { useNavigate } from "react-router-dom";
 import { route } from "../../../Routes";
 import { toast } from "react-toastify";
+import api from "../../../Config/api";
 
 export default function BrandManagement() {
   const [brands, setBrands] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchBrand() {
       const response = await api.get("Brand");
@@ -107,7 +108,6 @@ export default function BrandManagement() {
       // specify the condition of filtering result
       // here is that finding the name started with `value`
       sorter: (a, b) => a.brand_Id - b.brand_Id,
-      defaultSortOrder: "ascend",
     },
 
     {

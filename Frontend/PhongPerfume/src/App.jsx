@@ -12,8 +12,14 @@ import LoginPage from "./Pages/UserPages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import BrandManagement from "./Pages/AdminPages/BrandManagement/BrandManagement";
 import ProtectedRoute from "./Routes/ProtectedRoute";
+import DetailPage from "./Pages/UserPages/Details/DetailPage";
+import CartPage from "./Pages/UserPages/CartPage/CartPage";
+import { useSelector } from "react-redux";
+import { selectUser } from "./Redux/features/counterSlice";
 
 function App() {
+  const user = useSelector(selectUser);
+
   const router = createBrowserRouter([
     {
       path: route.home,
@@ -34,6 +40,14 @@ function App() {
         {
           path: route.register,
           element: <RegisterPage />,
+        },
+        {
+          path: `${route.perfumes}/:id`,
+          element: <DetailPage />,
+        },
+        {
+          path: `${user?.username}/${route.cart}`,
+          element: <CartPage />,
         },
       ],
     },

@@ -1,10 +1,21 @@
-import { Button, Carousel, Form, Image, Input, Modal, Table } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import {
+  Button,
+  Carousel,
+  Form,
+  Image,
+  Input,
+  Modal,
+  Table,
+  Upload,
+} from "antd";
 import React, { useEffect, useState } from "react";
-import api from "../../../Config/Api";
 import { useNavigate } from "react-router-dom";
 import { route } from "../../../Routes";
 import { toast } from "react-toastify";
 import "./PerfumeManagement.scss";
+import uploadFile from "../../../Components/Utils/uploadAppwrite";
+import api from "../../../Config/api";
 export default function PerfumeManagement() {
   const [perfumes, setPerfumes] = useState([]);
   const navigate = useNavigate();
@@ -22,11 +33,17 @@ export default function PerfumeManagement() {
   function handleModalAdd() {
     setisModalAddOpen(true);
   }
-  const handleAdd = async () => {
+  const handleOk = () => {
+    formAdd.submit();
+  };
+
+  const handleAdd = async (values) => {
+    // Validate form inputs
+    console.log(values);
+    const imgURLs = fileList.map((file) => file.url); // Collect all uploaded image URLs
+    values.perfume_images = imgURLs;
+
     try {
-      // Validate form inputs
-      const values = await formAdd.validateFields();
-      console.log(values);
       // Call API to create a new brand
       const response = await api.post(`Perfume`, values);
       console.log("Add response:", response);
@@ -38,6 +55,7 @@ export default function PerfumeManagement() {
       setisModalAddOpen(false);
       // Reset the form fields
       formAdd.resetFields();
+      setFileList([]);
     } catch (error) {
       console.error("Failed to add Perfume:", error.response?.data || error);
       toast.error("Failed to add Perfume");
@@ -68,26 +86,43 @@ export default function PerfumeManagement() {
   const [isModalUpdateOpen, setisModalUpdateOpen] = useState(false);
   const [selectedPerfume, setSelectedPerfume] = useState(null);
   const [formUpdate] = Form.useForm();
+  const handleOkUpdate = () => {
+    formUpdate.submit();
+  };
+
   async function handleModalUpdate(values) {
     setSelectedPerfume(values); // Set the brand to be updated
     formUpdate.setFieldsValue(values); // Populate form with existing brand data
     setisModalUpdateOpen(true); // Open the modal
   }
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (values) => {
+    console.log(fileListUpdate);
+    console.log(selectedPerfume.perfume_images);
+    if (fileListUpdate && fileListUpdate.length > 0) {
+      const imagURLUpdate = fileListUpdate.map((file) => file.url);
+      values.perfume_images = imagURLUpdate;
+    } else {
+      values.perfume_images = selectedPerfume.perfume_images;
+    }
+    console.log(values);
     try {
-      const updatedPerfume = await formUpdate.validateFields(); // Validate form inputs
-      await api.put(`Perfume/${selectedPerfume.perfume_Id}`, updatedPerfume); // Call API to update
+      const response = await api.put(
+        `Perfume/${selectedPerfume.perfume_Id}`,
+        values
+      ); // Call API to update
+      console.log(response.data);
       toast.success("Updated successfully");
       setPerfumes(
         perfumes.map((perfume) =>
           perfume.perfume_Id === selectedPerfume.perfume_Id
-            ? { ...perfume, ...updatedPerfume }
+            ? { ...perfume, ...values }
             : perfume
         )
       );
       setisModalUpdateOpen(false); // Close modal
       setSelectedPerfume(null); // Reset selected brand
+      setFileListUpdate([]);
     } catch (error) {
       console.error("Failed to update Perfume:", error.response?.data || error);
       toast.error("Failed to update Perfume");
@@ -101,8 +136,8 @@ export default function PerfumeManagement() {
 
       // specify the condition of filtering result
       // here is that finding the name started with `value`
-      sorter: (a, b) => a.brand_Id - b.brand_Id,
-      defaultSortOrder: "ascend",
+      sorter: (a, b) => a.perfume_Id - b.perfume_Id,
+      defaultSortOrder: "descend",
     },
 
     {
@@ -152,16 +187,7 @@ export default function PerfumeManagement() {
             style={{ width: "200px" }}
           >
             {perfumes.map((perfume, index) => (
-              <Image
-                key={index}
-                src={perfume}
-                alt="value"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "100px",
-                  objectFit: "contain",
-                }}
-              />
+              <Image key={index} src={perfume} alt="value" />
             ))}
           </Carousel>
         </>
@@ -225,9 +251,100 @@ export default function PerfumeManagement() {
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
+
+  const getBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => {
+        console.log(error);
+        reject(error);
+      };
+    });
+  };
+
+  const [fileList, setFileList] = useState([]);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewTitle, setPreviewTitle] = useState("");
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewImage(file.url || file.preview);
+    setPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+    );
+    setPreviewOpen(true);
+  };
+
+  const handleChange = async ({ fileList: newFileList }) => {
+    const updatedFileList = await Promise.all(
+      newFileList.map(async (file) => {
+        if (file.status !== "done") {
+          try {
+            const url = await uploadFile(file.originFileObj); // Upload the file and get the URL
+            return { ...file, url, status: "done" }; // Update the file status and add the URL
+          } catch (error) {
+            console.error("Upload failed", error);
+            toast.error("File upload failed");
+            return { ...file, status: "error" }; // Set status to error on failure
+          }
+        }
+        return file; // Keep already uploaded files as-is
+      })
+    );
+
+    setFileList(updatedFileList);
+    toast.success("Files uploaded successfully");
+  };
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
+  const [fileListUpdate, setFileListUpdate] = useState([]);
+  const [previewOpenUpdate, setPreviewOpenUpdate] = useState(false);
+  const [previewImageUpdate, setPreviewImageUpdate] = useState("");
+  const [previewTitleUpdate, setPreviewTitleUpdate] = useState("");
+  const handlePreviewUpdate = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewImage(file.url || file.preview);
+    setPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+    );
+    setPreviewOpen(true);
+  };
+
+  const handleChangeUpdate = async ({ fileList: newFileList }) => {
+    const updatedFileList = await Promise.all(
+      newFileList.map(async (file) => {
+        if (file.status !== "done") {
+          try {
+            const url = await uploadFile(file.originFileObj); // Upload the file and get the URL
+            return { ...file, url, status: "done" }; // Update the file status and add the URL
+          } catch (error) {
+            console.error("Upload failed", error);
+            toast.error("File upload failed");
+            return { ...file, status: "error" }; // Set status to error on failure
+          }
+        }
+        return file; // Keep already uploaded files as-is
+      })
+    );
+
+    setFileListUpdate(updatedFileList);
+    toast.success("Files uploaded successfully");
+  };
   return (
     <div>
-      <Button onClick={handleModalAdd}>Add Brand</Button>
+      <Button onClick={handleModalAdd}>Add Perfume</Button>
       <Table
         columns={columns}
         dataSource={perfumes}
@@ -240,9 +357,9 @@ export default function PerfumeManagement() {
         title="Add Perfumes"
         visible={isModalAddOpen}
         onCancel={() => setisModalAddOpen(false)}
-        onOk={handleAdd}
+        onOk={handleOk}
       >
-        <Form form={formAdd} layout="vertical">
+        <Form form={formAdd} layout="vertical" onFinish={handleAdd}>
           <Form.Item
             name="perfume_Name"
             label="Perfume Name"
@@ -273,21 +390,31 @@ export default function PerfumeManagement() {
           >
             <Input />
           </Form.Item>
-          {/* <Form.Item
-            name="perfume_images"
-            label="Perfume Images"
-            rules={[
-              {
-                required: true,
-                message: "Please enter at least one image URL",
-              },
-            ]}
-          >
-            <Input.TextArea
-              rows={3}
-              placeholder="Enter image URLs separated by commas"
-            />
-          </Form.Item> */}
+          <Form.Item name="perfume_images" label="Perfume Images">
+            <Upload
+              className="label-form-image"
+              maxCount={8}
+              listType="picture-card"
+              fileList={fileList}
+              onPreview={handlePreview}
+              onChange={handleChange}
+            >
+              {fileList.length >= 8 ? null : uploadButton}
+            </Upload>
+            {previewImage && (
+              <Image
+                wrapperStyle={{
+                  display: "none",
+                }}
+                preview={{
+                  visible: previewOpen,
+                  onVisibleChange: (visible) => setPreviewOpen(visible),
+                  afterOpenChange: (visible) => !visible && setPreviewImage(""),
+                }}
+                src={previewImage}
+              />
+            )}
+          </Form.Item>
           <Form.Item
             name="size"
             label="Size (ml)"
@@ -327,9 +454,9 @@ export default function PerfumeManagement() {
         title="Update Perfumes"
         visible={isModalUpdateOpen}
         onCancel={() => setisModalUpdateOpen(false)}
-        onOk={handleUpdate}
+        onOk={handleOkUpdate}
       >
-        <Form form={formUpdate} layout="vertical">
+        <Form form={formUpdate} layout="vertical" onFinish={handleUpdate}>
           <Form.Item
             name="perfume_Name"
             label="Perfume Name"
@@ -360,20 +487,31 @@ export default function PerfumeManagement() {
           >
             <Input />
           </Form.Item>
-          <Form.Item
-            name="perfume_images"
-            label="Perfume Images"
-            rules={[
-              {
-                required: true,
-                message: "Please enter at least one image URL",
-              },
-            ]}
-          >
-            <Input.TextArea
-              rows={3}
-              placeholder="Enter image URLs separated by commas"
-            />
+          <Form.Item name="perfume_images" label="Perfume Images">
+            <Upload
+              className="label-form-image"
+              maxCount={8}
+              listType="picture-card"
+              fileList={fileListUpdate}
+              onPreview={handlePreviewUpdate}
+              onChange={handleChangeUpdate}
+            >
+              {fileListUpdate.length >= 8 ? null : uploadButton}
+            </Upload>
+            {previewImageUpdate && (
+              <Image
+                wrapperStyle={{
+                  display: "none",
+                }}
+                preview={{
+                  visible: previewOpenUpdate,
+                  onVisibleChange: (visible) => setPreviewOpenUpdate(visible),
+                  afterOpenChange: (visible) =>
+                    !visible && setPreviewImageUpdate(""),
+                }}
+                src={previewImageUpdate}
+              />
+            )}
           </Form.Item>
           <Form.Item
             name="size"

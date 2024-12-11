@@ -240,6 +240,13 @@ namespace PhongPerfume.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RefreshTokenExpiry")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("Reward_point")
                         .HasColumnType("integer");
 

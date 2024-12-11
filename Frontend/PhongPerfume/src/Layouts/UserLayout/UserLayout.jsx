@@ -8,6 +8,7 @@ export default function UserLayout() {
   return (
     <>
       <Container fluid>
+        <div className="announcement-bar">Best perfume brand in Vietnam</div>
         <Container>
           <HeaderComponent />
           <Outlet />

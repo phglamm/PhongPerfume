@@ -1,5 +1,4 @@
-﻿using PhongPerfume.DTO.UserDTO;
-using PhongPerfume.Models;
+﻿using PhongPerfume.Models;
 
 namespace PhongPerfume.Interface
 {
@@ -10,7 +9,10 @@ namespace PhongPerfume.Interface
         Task<User> AddUserAsync(User user);
         Task<User> UpdateUserAsync(User user);
         Task DeleteUserAsync(int id);
-        UserGetAll GetUserByUsername(string username);
+        User GetUserByUsername(string username);
         String GetRoleByUsername(string username);
+        User GetUserByEmail(string email);
+        User GetUserByRefreshToken(string refreshToken);
+
     }
 }

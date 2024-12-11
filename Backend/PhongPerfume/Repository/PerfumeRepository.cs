@@ -42,6 +42,12 @@ namespace PhongPerfume.Repository
             return selectedPerfume;
         }
 
+        public async Task<Perfume> GetPerfumeWithBrandNameByIdAsync(int id)
+        {
+            var selectedPerfume = await _context.Perfumes.Include(b => b.Brand).FirstOrDefaultAsync(u => u.Perfume_Id == id);
+            return selectedPerfume;
+        }
+
         public async Task<Perfume> UpdatePerfumeAsync(Perfume perfume)
         {
             _context.Perfumes.Update(perfume);

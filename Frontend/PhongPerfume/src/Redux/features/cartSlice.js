@@ -10,7 +10,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const item = state.cartItems.find(
-        (item) => item.id === action.payload.id
+        (cartItem) => cartItem.perfume_Id === action.payload.perfume_Id
       );
       if (item) {
         item.quantity += 1;
@@ -20,12 +20,12 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter(
-        (item) => item.id !== action.payload.id
+        (cartItem) => cartItem.perfume_Id !== action.payload.perfume_Id
       );
     },
     increaseQuantity: (state, action) => {
       const item = state.cartItems.find(
-        (item) => item.id === action.payload.id
+        (cartItem) => cartItem.perfume_Id === action.payload.perfume_Id
       );
       if (item) {
         item.quantity += 1;
@@ -33,7 +33,7 @@ const cartSlice = createSlice({
     },
     decreaseQuantity: (state, action) => {
       const item = state.cartItems.find(
-        (item) => item.id === action.payload.id
+        (cartItem) => cartItem.perfume_Id === action.payload.perfume_Id
       );
       if (item && item.quantity > 1) {
         item.quantity -= 1;

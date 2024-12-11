@@ -1,22 +1,23 @@
 import React from "react";
 import { Layout, Form, Input, Button, Typography, Radio } from "antd";
-import api from "../../Config/Api";
 import { toast } from "react-toastify";
+import api from "../../Config/api";
 
 const { Title } = Typography;
-const onFinish = async (values) => {
-  console.log("Registration details:", values);
-  try {
-    values.Role = "customer";
-    values.reward_point = 0;
-    const response = await api.post("Authentication/register", values);
-    console.log(response);
-    toast.success("Register Succesfully");
-  } catch (error) {
-    console.log(error.response.data);
-  }
-};
+
 export default function RegisterPage() {
+  const onFinish = async (values) => {
+    console.log("Registration details:", values);
+    try {
+      values.Role = "customer";
+      values.reward_point = 0;
+      const response = await api.post("Authentication/register", values);
+      console.log(response);
+      toast.success("Register Succesfully");
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
   return (
     <div
       style={{

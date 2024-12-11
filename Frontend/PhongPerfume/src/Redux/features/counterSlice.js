@@ -7,7 +7,7 @@ export const counterSlice = createSlice({
     login: (state, actions) => {
       return actions.payload;
     },
-    logout: () => {
+    logout: (state) => {
       return null;
     },
   },

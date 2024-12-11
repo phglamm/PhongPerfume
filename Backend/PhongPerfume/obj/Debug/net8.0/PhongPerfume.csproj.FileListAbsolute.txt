@@ -146,3 +146,13 @@ C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\obj\Debug\net8
 C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\obj\Debug\net8.0\PhongPerfume.pdb
 C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\obj\Debug\net8.0\PhongPerfume.genruntimeconfig.cache
 C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\obj\Debug\net8.0\ref\PhongPerfume.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\FirebaseAdmin.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\Google.Api.Gax.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\Google.Api.Gax.Rest.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\Google.Apis.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\Google.Apis.Auth.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\Google.Apis.Core.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\System.Management.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll
+C:\Users\lamph\OneDrive\Desktop\PhongPerfume\Backend\PhongPerfume\bin\Debug\net8.0\Keys\serviceAccountKey.json
