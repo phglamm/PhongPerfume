@@ -25,6 +25,7 @@ namespace PhongPerfume.Controllers
             var EventsDTO = Events.Select(c => new EventGetAll
             {
                 Event_Id = c.Event_Id,
+                Event_Poster = c.Event_Poster,
                 Event_Name = c.Event_Name,
                 Event_Start = c.Event_Start,
                 Event_End = c.Event_End,
@@ -46,6 +47,7 @@ namespace PhongPerfume.Controllers
             var selectedEventDTO = new EventGetAll
             {
                 Event_Id = selectedEvent.Event_Id,
+                Event_Poster = selectedEvent.Event_Poster,
                 Event_Name = selectedEvent.Event_Name,
                 Event_Start = selectedEvent.Event_Start,
                 Event_End = selectedEvent.Event_End,
@@ -67,6 +69,7 @@ namespace PhongPerfume.Controllers
             {
 
                 Event_Name = eventPost.Event_Name,
+                Event_Poster = eventPost.Event_Poster,
                 Event_Start = eventPost.Event_Start,
                 Event_End = eventPost.Event_End,
                 Event_Voucher = eventPost.Event_Voucher,
@@ -92,6 +95,7 @@ namespace PhongPerfume.Controllers
             }
 
             ToUpdateEvent.Event_Name = eventPost.Event_Name;
+            ToUpdateEvent.Event_Poster = eventPost.Event_Poster;
             ToUpdateEvent.Event_Start = eventPost.Event_Start;
             ToUpdateEvent.Event_End = eventPost.Event_End;
             ToUpdateEvent.Event_Voucher = eventPost.Event_Voucher;

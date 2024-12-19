@@ -8,7 +8,7 @@ namespace PhongPerfume.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class BrandController : Controller
     {
         private readonly IBrandRepository _brandRepository;
@@ -27,6 +27,7 @@ namespace PhongPerfume.Controllers
             var BrandsDTO = Brands.Select(c => new BrandGetAll
             {
                 Brand_Id = c.Brand_Id,
+                Brand_Images = c.Brand_Images,
                 Brand_Name = c.Brand_Name,
                 Brand_Description = c.Brand_Description,
                 Perfumes = c.Perfumes.Select(p => p.Perfume_Name).ToList()
@@ -37,7 +38,7 @@ namespace PhongPerfume.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BrandGetAll>> GetBrandById(int id)
         {
-            var selectedBrand = await _brandRepository.GetBrandByIdAsync(id);
+            var selectedBrand = await _brandRepository.GetBrandWithPerfumeByIdAsync(id);
             if (selectedBrand == null)
             {
                 return NotFound($"Cannot find Brand with ID:{id}");
@@ -45,6 +46,7 @@ namespace PhongPerfume.Controllers
             var selectedBrandDTO = new BrandGetAll
             {
                 Brand_Id = selectedBrand.Brand_Id,
+                Brand_Images = selectedBrand.Brand_Images,
                 Brand_Name = selectedBrand.Brand_Name,
                 Brand_Description = selectedBrand.Brand_Description,
                 Perfumes = selectedBrand.Perfumes.Select(p => p.Perfume_Name).ToList()
@@ -64,6 +66,7 @@ namespace PhongPerfume.Controllers
             {
 
                 Brand_Name = brandPost.Brand_Name,
+                Brand_Images = brandPost.Brand_Images,
                 Brand_Description = brandPost.Brand_Description,
             };
 
@@ -86,6 +89,7 @@ namespace PhongPerfume.Controllers
             }
 
             ToUpdateBrand.Brand_Name = brandPost.Brand_Name;
+            ToUpdateBrand.Brand_Images = brandPost.Brand_Images;
             ToUpdateBrand.Brand_Description = brandPost.Brand_Description;
 
 

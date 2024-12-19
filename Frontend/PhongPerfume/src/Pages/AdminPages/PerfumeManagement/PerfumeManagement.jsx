@@ -19,6 +19,7 @@ import api from "../../../Config/api";
 export default function PerfumeManagement() {
   const [perfumes, setPerfumes] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function fetchPerfume() {
       const response = await api.get("Perfume");
@@ -29,6 +30,54 @@ export default function PerfumeManagement() {
   }, []);
   const [isModalAddOpen, setisModalAddOpen] = useState(false);
   const [formAdd] = Form.useForm();
+
+  const getBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => {
+        console.log(error);
+        reject(error);
+      };
+    });
+  };
+
+  const [fileList, setFileList] = useState([]);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewTitle, setPreviewTitle] = useState("");
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewImage(file.url || file.preview);
+    setPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+    );
+    setPreviewOpen(true);
+  };
+
+  const handleChange = async ({ fileList: newFileList }) => {
+    const updatedFileList = await Promise.all(
+      newFileList.map(async (file) => {
+        if (file.status !== "done") {
+          try {
+            const url = await uploadFile(file.originFileObj); // Upload the file and get the URL
+            return { ...file, url, status: "done" }; // Update the file status and add the URL
+          } catch (error) {
+            console.error("Upload failed", error);
+            toast.error("File upload failed");
+            return { ...file, status: "error" }; // Set status to error on failure
+          }
+        }
+        return file; // Keep already uploaded files as-is
+      })
+    );
+
+    setFileList(updatedFileList);
+    toast.success("Files uploaded successfully");
+  };
 
   function handleModalAdd() {
     setisModalAddOpen(true);
@@ -82,52 +131,6 @@ export default function PerfumeManagement() {
       toast.error(error.response);
     }
   }
-
-  const [isModalUpdateOpen, setisModalUpdateOpen] = useState(false);
-  const [selectedPerfume, setSelectedPerfume] = useState(null);
-  const [formUpdate] = Form.useForm();
-  const handleOkUpdate = () => {
-    formUpdate.submit();
-  };
-
-  async function handleModalUpdate(values) {
-    setSelectedPerfume(values); // Set the brand to be updated
-    formUpdate.setFieldsValue(values); // Populate form with existing brand data
-    setisModalUpdateOpen(true); // Open the modal
-  }
-
-  const handleUpdate = async (values) => {
-    console.log(fileListUpdate);
-    console.log(selectedPerfume.perfume_images);
-    if (fileListUpdate && fileListUpdate.length > 0) {
-      const imagURLUpdate = fileListUpdate.map((file) => file.url);
-      values.perfume_images = imagURLUpdate;
-    } else {
-      values.perfume_images = selectedPerfume.perfume_images;
-    }
-    console.log(values);
-    try {
-      const response = await api.put(
-        `Perfume/${selectedPerfume.perfume_Id}`,
-        values
-      ); // Call API to update
-      console.log(response.data);
-      toast.success("Updated successfully");
-      setPerfumes(
-        perfumes.map((perfume) =>
-          perfume.perfume_Id === selectedPerfume.perfume_Id
-            ? { ...perfume, ...values }
-            : perfume
-        )
-      );
-      setisModalUpdateOpen(false); // Close modal
-      setSelectedPerfume(null); // Reset selected brand
-      setFileListUpdate([]);
-    } catch (error) {
-      console.error("Failed to update Perfume:", error.response?.data || error);
-      toast.error("Failed to update Perfume");
-    }
-  };
 
   const columns = [
     {
@@ -252,61 +255,6 @@ export default function PerfumeManagement() {
     console.log("params", pagination, filters, sorter, extra);
   };
 
-  const getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => {
-        console.log(error);
-        reject(error);
-      };
-    });
-  };
-
-  const [fileList, setFileList] = useState([]);
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-    setPreviewImage(file.url || file.preview);
-    setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
-    );
-    setPreviewOpen(true);
-  };
-
-  const handleChange = async ({ fileList: newFileList }) => {
-    const updatedFileList = await Promise.all(
-      newFileList.map(async (file) => {
-        if (file.status !== "done") {
-          try {
-            const url = await uploadFile(file.originFileObj); // Upload the file and get the URL
-            return { ...file, url, status: "done" }; // Update the file status and add the URL
-          } catch (error) {
-            console.error("Upload failed", error);
-            toast.error("File upload failed");
-            return { ...file, status: "error" }; // Set status to error on failure
-          }
-        }
-        return file; // Keep already uploaded files as-is
-      })
-    );
-
-    setFileList(updatedFileList);
-    toast.success("Files uploaded successfully");
-  };
-
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-
   const [fileListUpdate, setFileListUpdate] = useState([]);
   const [previewOpenUpdate, setPreviewOpenUpdate] = useState(false);
   const [previewImageUpdate, setPreviewImageUpdate] = useState("");
@@ -315,11 +263,11 @@ export default function PerfumeManagement() {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-    setPreviewImage(file.url || file.preview);
-    setPreviewTitle(
+    setPreviewImageUpdate(file.url || file.preview);
+    setPreviewTitleUpdate(
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
-    setPreviewOpen(true);
+    setPreviewOpenUpdate(true);
   };
 
   const handleChangeUpdate = async ({ fileList: newFileList }) => {
@@ -342,10 +290,65 @@ export default function PerfumeManagement() {
     setFileListUpdate(updatedFileList);
     toast.success("Files uploaded successfully");
   };
+
+  const [isModalUpdateOpen, setisModalUpdateOpen] = useState(false);
+  const [selectedPerfume, setSelectedPerfume] = useState(null);
+  const [formUpdate] = Form.useForm();
+  const handleOkUpdate = () => {
+    formUpdate.submit();
+  };
+
+  async function handleModalUpdate(values) {
+    setSelectedPerfume(values); // Set the brand to be updated
+    formUpdate.setFieldsValue(values); // Populate form with existing brand data
+    setisModalUpdateOpen(true); // Open the modal
+  }
+
+  const handleUpdate = async (values) => {
+    console.log(fileListUpdate);
+    console.log(selectedPerfume.perfume_images);
+    if (fileListUpdate && fileListUpdate.length > 0) {
+      const imagURLUpdate = fileListUpdate.map((file) => file.url);
+      values.perfume_images = imagURLUpdate;
+    } else {
+      values.perfume_images = selectedPerfume.perfume_images;
+    }
+    console.log(values);
+    try {
+      const response = await api.put(
+        `Perfume/${selectedPerfume.perfume_Id}`,
+        values
+      ); // Call API to update
+      console.log(response.data);
+      toast.success("Updated successfully");
+      setPerfumes(
+        perfumes.map((perfume) =>
+          perfume.perfume_Id === selectedPerfume.perfume_Id
+            ? { ...perfume, ...values }
+            : perfume
+        )
+      );
+      setisModalUpdateOpen(false); // Close modal
+      setSelectedPerfume(null); // Reset selected brand
+      setFileListUpdate([]);
+    } catch (error) {
+      console.error("Failed to update Perfume:", error.response?.data || error);
+      toast.error("Failed to update Perfume");
+    }
+  };
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   return (
     <div>
       <Button onClick={handleModalAdd}>Add Perfume</Button>
       <Table
+        loading={loading}
         columns={columns}
         dataSource={perfumes}
         onChange={onChange}

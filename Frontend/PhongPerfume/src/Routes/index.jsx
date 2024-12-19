@@ -9,6 +9,9 @@ export const route = {
   notfound: "not-found",
   perfumes: "perfumes",
   cart: "cart",
+  orderHistory: "order-history",
+  checkout: "checkout",
+
   admin: "/admin",
   userManagement: "user-management",
   perfumeManagement: "perfume-management",

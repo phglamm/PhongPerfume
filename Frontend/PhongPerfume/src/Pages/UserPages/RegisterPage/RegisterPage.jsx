@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Form, Input, Button, Typography, Radio } from "antd";
 import { toast } from "react-toastify";
-import api from "../../Config/api";
+import api from "../../../Config/Api";
 
 const { Title } = Typography;
 

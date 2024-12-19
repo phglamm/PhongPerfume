@@ -8,13 +8,18 @@ import {
   clearCart,
   selectCartItems,
 } from "../../../Redux/features/cartSlice";
+import { Container } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { route } from "../../../Routes";
+import { selectUser } from "../../../Redux/features/counterSlice";
 
 const { Title, Text } = Typography;
 
 export default function CartPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
-
+  const user = useSelector(selectUser);
+  const navigate = useNavigate();
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -29,9 +34,10 @@ export default function CartPage() {
         <img
           src={record.perfume_images[0]}
           alt={record.perfume_Name}
-          style={{ width: "50px", height: "50px", objectFit: "cover" }}
+          style={{ width: "100%", height: "200px" }}
         />
       ),
+      width: 400,
     },
     {
       title: "Name",
@@ -94,46 +100,53 @@ export default function CartPage() {
   ];
 
   return (
-    <div style={{ padding: "30px" }}>
-      <Title level={2}>Your Cart</Title>
-      <Divider />
-      {cartItems.length > 0 ? (
-        <>
-          <Table
-            dataSource={cartItems}
-            columns={columns}
-            pagination={false}
-            bordered
-          />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "20px",
-            }}
-          >
-            <Title level={4}>Total: ${totalPrice.toLocaleString()}</Title>
-            <div>
-              <Button
-                type="primary"
-                size="large"
-                style={{ marginRight: "10px" }}
-              >
-                Proceed to Checkout
-              </Button>
-              <Button
-                type="default"
-                size="large"
-                onClick={() => dispatch(clearCart())}
-              >
-                Clear Cart
-              </Button>
+    <Container>
+      <div style={{ padding: "30px" }}>
+        <Title level={2}>Your Cart</Title>
+        <Divider />
+        {cartItems.length > 0 ? (
+          <>
+            <Table
+              dataSource={cartItems}
+              columns={columns}
+              pagination={false}
+              bordered
+            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginTop: "20px",
+              }}
+            >
+              <Title level={4}>Total: ${totalPrice.toLocaleString()}</Title>
+              <div>
+                <Link to={`/${user?.username}/${route.checkout}`}>
+                  <Button
+                    // onClick={() =>
+                    //   navigate(`${user?.username}/${route.checkout}`)
+                    // }
+                    type="primary"
+                    size="large"
+                    style={{ marginRight: "10px" }}
+                  >
+                    Proceed to Checkout
+                  </Button>
+                </Link>
+                <Button
+                  type="default"
+                  size="large"
+                  onClick={() => dispatch(clearCart())}
+                >
+                  Clear Cart
+                </Button>
+              </div>
             </div>
-          </div>
-        </>
-      ) : (
-        <Text type="secondary">Your cart is empty.</Text>
-      )}
-    </div>
+          </>
+        ) : (
+          <Text type="secondary">Your cart is empty.</Text>
+        )}
+      </div>
+    </Container>
   );
 }

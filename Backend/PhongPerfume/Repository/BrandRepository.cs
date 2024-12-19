@@ -38,6 +38,11 @@ namespace PhongPerfume.Repository
 
         public async Task<Brand> GetBrandByIdAsync(int id)
         {
+            var selectedBrand = await _context.Brands.FindAsync(id);
+            return selectedBrand;
+        }
+        public async Task<Brand> GetBrandWithPerfumeByIdAsync(int id)
+        {
             var selectedBrand = await _context.Brands.Include(p => p.Perfumes).FirstOrDefaultAsync(b => b.Brand_Id == id);
             return selectedBrand;
         }

@@ -20,6 +20,7 @@ const { Header } = Layout;
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 import "./HeaderComponent.scss";
+
 export default function HeaderComponent() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -62,6 +63,11 @@ export default function HeaderComponent() {
               `${user.username}/${route.cart}`,
               <ShoppingCartOutlined />
             ),
+            getItem(
+              "Orders",
+              `${user.username}/${route.orderHistory}`,
+              <ShoppingCartOutlined />
+            ),
           ]),
           getItem("Logout", "/logout", <LogoutOutlined />, null, () => {
             localStorage.removeItem("accessToken");
@@ -95,10 +101,10 @@ export default function HeaderComponent() {
 
   const handleMenuClick = (e) => {
     const { key } = e;
+    setSelectedKey(key); // Update the selected key immediately
     if (key === "/logout") {
       return;
     }
-    setSelectedKey(key);
   };
 
   return (
@@ -126,7 +132,7 @@ export default function HeaderComponent() {
           <Menu
             mode="horizontal"
             selectedKeys={[selectedKey]}
-            onClick={handleMenuClick}
+            onClick={handleMenuClick} // Handle menu click
             style={{
               flexGrow: 1,
               justifyContent: "end",

@@ -36,6 +36,11 @@ namespace PhongPerfume.Repository
             return await _context.Orders.ToListAsync();
         }
 
+        public async Task<IEnumerable<Order>> GetAllOrdersFromUserAsync(int userID)
+        {
+            return await _context.Orders.Include(u => u.User).ThenInclude(o => o.Orders).ToListAsync();
+        }
+
         public async Task<Order> GetOrderByIdAsync(int id)
         {
             var selectedOrder = await _context.Orders.FindAsync(id);

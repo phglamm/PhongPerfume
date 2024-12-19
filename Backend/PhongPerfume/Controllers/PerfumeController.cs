@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PhongPerfume.DTO.PerfumeDTO;
 using PhongPerfume.Interface;
 using PhongPerfume.Models;
@@ -8,7 +7,7 @@ namespace PhongPerfume.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PerfumeController : Controller
     {
         private readonly IPerfumeRepository _perfumeRepository;

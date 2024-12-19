@@ -6,6 +6,7 @@ namespace PhongPerfume.Models
     {
         [Key]
         public int Event_Id { get; set; }
+        public string Event_Poster { get; set; }
         public string Event_Name { get; set; }
         public DateTime Event_Start { get; set; }
         public DateTime Event_End { get; set; }

@@ -3,6 +3,7 @@
     public class UserGetAll
     {
         public int User_Id { get; set; }
+        public string User_avatar { get; set; }
         public string Full_Name { get; set; }
         public bool Gender { get; set; }
         public string Phone { get; set; }

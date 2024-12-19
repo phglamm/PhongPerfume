@@ -62,6 +62,7 @@ namespace PhongPerfume.Repository
             var userDTO = new User
             {
                 User_Id = user.User_Id,
+                User_avatar = user.User_avatar,
                 Full_Name = user.Full_Name,
                 Gender = user.Gender,
                 Phone = user.Phone,

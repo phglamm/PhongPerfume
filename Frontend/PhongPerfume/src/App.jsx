@@ -9,13 +9,15 @@ import AboutPage from "./Pages/UserPages/About/AboutPage";
 import UserManagement from "./Pages/AdminPages/UserManagement/UserManagement";
 import PerfumeManagement from "./Pages/AdminPages/PerfumeManagement/PerfumeManagement";
 import LoginPage from "./Pages/UserPages/LoginPage/LoginPage";
-import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import BrandManagement from "./Pages/AdminPages/BrandManagement/BrandManagement";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import DetailPage from "./Pages/UserPages/Details/DetailPage";
 import CartPage from "./Pages/UserPages/CartPage/CartPage";
 import { useSelector } from "react-redux";
 import { selectUser } from "./Redux/features/counterSlice";
+import RegisterPage from "./Pages/UserPages/RegisterPage/RegisterPage";
+import OrderHistoryPage from "./Pages/UserPages/OrderHistoryPage/OrderHistoryPage";
+import CheckoutPage from "./Pages/UserPages/CheckoutPage/CheckoutPage";
 
 function App() {
   const user = useSelector(selectUser);
@@ -48,6 +50,14 @@ function App() {
         {
           path: `${user?.username}/${route.cart}`,
           element: <CartPage />,
+        },
+        {
+          path: `${user?.username}/${route.orderHistory}`,
+          element: <OrderHistoryPage />,
+        },
+        {
+          path: `${user?.username}/${route.checkout}`,
+          element: <CheckoutPage />,
         },
       ],
     },

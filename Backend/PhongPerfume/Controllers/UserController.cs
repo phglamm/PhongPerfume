@@ -26,6 +26,7 @@ namespace PhongPerfume.Controllers
             var UsersDTO = Users.Select(c => new UserGetAll
             {
                 User_Id = c.User_Id,
+                User_avatar = c.User_avatar,
                 Full_Name = c.Full_Name,
                 Gender = c.Gender,
                 Phone = c.Phone,
@@ -50,6 +51,7 @@ namespace PhongPerfume.Controllers
             var selectedUserDTO = new UserGetAll
             {
                 User_Id = selectedUser.User_Id,
+                User_avatar = selectedUser.User_avatar,
                 Full_Name = selectedUser.Full_Name,
                 Gender = selectedUser.Gender,
                 Phone = selectedUser.Phone,
@@ -73,6 +75,7 @@ namespace PhongPerfume.Controllers
 
             var addUser = new User
             {
+                User_avatar = userPost.User_avatar,
                 Full_Name = userPost.Full_Name,
                 Gender = userPost.Gender,
                 Phone = userPost.Phone,
@@ -101,6 +104,7 @@ namespace PhongPerfume.Controllers
                 return BadRequest("User's Data is required");
             }
 
+            ToUpdateUser.User_avatar = userPost.User_avatar;
             ToUpdateUser.Full_Name = userPost.Full_Name;
             ToUpdateUser.Gender = userPost.Gender;
             ToUpdateUser.Phone = userPost.Phone;

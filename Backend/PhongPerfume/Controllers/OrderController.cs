@@ -42,6 +42,32 @@ namespace PhongPerfume.Controllers
             return Ok(OrdersDTO);
         }
 
+
+        [HttpGet("OrderFromUser/{userID}")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetAllOrderFromUser(int userID)
+        {
+            var Orders = await _orderRepository.GetAllOrdersFromUserAsync(userID);
+            var OrdersDTO = Orders.Select(c => new OrderGetAll
+            {
+                Order_Id = c.Order_Id,
+                Order_Address = c.Order_Address,
+                Order_Status = c.Order_Status,
+                Total_Price = c.Total_Price,
+                User_Id = c.User_Id,
+                User = c.User,
+                Event_Id = c.Event_Id,
+                Event = c.Event,
+                Payment_Id = c.Payment_Id,
+                Payment = c.Payment,
+                Warranty_Id = c.Warranty_Id,
+                Warranty = c.Warranty,
+                OrderItems = c.OrderItems,
+
+
+            });
+            return Ok(OrdersDTO);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderGetAll>> GetOrderById(int id)
         {
