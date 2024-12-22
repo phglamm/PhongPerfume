@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel } from "antd";
-
+import "./CarouselComponent.scss";
 const CarouselComponent = ({ images }) => {
   return (
     <Carousel autoplay className="carousel">

@@ -20,8 +20,11 @@ import {
   UserOutlined,
   LockOutlined,
 } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../../Redux/features/cartSlice";
+import api from "../../../Config/api";
+import { order } from "../../../Redux/features/orderSlice";
+import { selectUser } from "../../../Redux/features/counterSlice";
 // import "antd/dist/antd.css";
 
 const { Step } = Steps;
@@ -33,6 +36,7 @@ export default function CheckoutPage() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const cartItems = useSelector(selectCartItems);
+  const user = useSelector(selectUser);
   const totalAmount = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -45,10 +49,28 @@ export default function CheckoutPage() {
   const prev = () => {
     setCurrentStep(currentStep - 1);
   };
+  const dispatch = useDispatch();
+  const handleClickSubmit = () => {
+    form.submit();
+  };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     message.success("Checkout successful!");
-    setIsModalVisible(true);
+    values.order_Status = "Pending";
+    values.total_Price = totalAmount;
+    values.user_Id = user.user_Id;
+    values.event_Id = 1;
+    values.payment_Id = 1;
+    values.warranty_Id = 1;
+    values.orderItems = cartItems;
+    console.log(values);
+    try {
+      const response = await api.post("Order", values);
+      console.log(response.data);
+      dispatch(order(response.data));
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   const handleModalClose = () => {
@@ -145,18 +167,18 @@ export default function CheckoutPage() {
               >
                 <Title level={3}>Your Information</Title>
                 <Form.Item
-                  name="name"
+                  name="order_customerName"
                   label="Full Name"
                   rules={[
                     { required: true, message: "Please input your full name!" },
                   ]}
                 >
-                  <Input placeholder="John Doe" />
+                  <Input />
                 </Form.Item>
 
                 <Form.Item
-                  name="email"
-                  label="Email Address"
+                  name="order_customerEmail"
+                  label="Email"
                   rules={[
                     {
                       required: true,
@@ -164,11 +186,24 @@ export default function CheckoutPage() {
                     },
                   ]}
                 >
-                  <Input placeholder="johndoe@example.com" />
+                  <Input />
                 </Form.Item>
 
                 <Form.Item
-                  name="address"
+                  name="order_customerPhone"
+                  label="Phone Number"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your phone number!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  name="order_Address"
                   label="Shipping Address"
                   rules={[
                     {
@@ -183,13 +218,18 @@ export default function CheckoutPage() {
                   />
                 </Form.Item>
 
-                <Button type="primary" size="large" htmlType="submit" block>
+                <Button
+                  type="primary"
+                  size="large"
+                  onClick={handleClickSubmit}
+                  block
+                >
                   Proceed to Payment
                 </Button>
               </Form>
             )}
 
-            {currentStep === 2 && (
+            {/* {currentStep === 2 && (
               <Form
                 form={form}
                 layout="vertical"
@@ -257,9 +297,9 @@ export default function CheckoutPage() {
                   Confirm Payment
                 </Button>
               </Form>
-            )}
+            )} */}
 
-            {currentStep === 3 && (
+            {currentStep === 2 && (
               <div>
                 <Title level={3} style={{ textAlign: "center" }}>
                   Order Complete

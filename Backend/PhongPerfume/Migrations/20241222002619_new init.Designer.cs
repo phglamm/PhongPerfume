@@ -13,8 +13,8 @@ using PhongPerfume.Data;
 namespace PhongPerfume.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241204090004_update OrderItems")]
-    partial class updateOrderItems
+    [Migration("20241222002619_new init")]
+    partial class newinit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,10 @@ namespace PhongPerfume.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Brand_Id"));
 
                     b.Property<string>("Brand_Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Brand_Images")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -62,6 +66,10 @@ namespace PhongPerfume.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Event_Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Event_Poster")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -99,14 +107,19 @@ namespace PhongPerfume.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Order_customerEmail")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Order_customerName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Payment_Id")
-                        .HasColumnType("integer");
+                    b.Property<string>("Order_customerPhone")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<int>("Payment_Id1")
+                    b.Property<int>("Payment_Id")
                         .HasColumnType("integer");
 
                     b.Property<int>("Total_Price")
@@ -118,18 +131,15 @@ namespace PhongPerfume.Migrations
                     b.Property<int>("Warranty_Id")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Warranty_Id1")
-                        .HasColumnType("integer");
-
                     b.HasKey("Order_Id");
 
                     b.HasIndex("Event_Id");
 
-                    b.HasIndex("Payment_Id1");
+                    b.HasIndex("Payment_Id");
 
                     b.HasIndex("User_Id");
 
-                    b.HasIndex("Warranty_Id1");
+                    b.HasIndex("Warranty_Id");
 
                     b.ToTable("Orders");
                 });
@@ -142,14 +152,14 @@ namespace PhongPerfume.Migrations
                     b.Property<int>("Perfume_Id")
                         .HasColumnType("integer");
 
-                    b.Property<int>("OrderDetail_Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
                     b.HasKey("Order_Id", "Perfume_Id");
 
                     b.HasIndex("Perfume_Id");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("PhongPerfume.Models.Payment", b =>
@@ -243,11 +253,20 @@ namespace PhongPerfume.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("RefreshTokenExpiry")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int>("Reward_point")
                         .HasColumnType("integer");
 
                     b.Property<string>("Role")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("User_avatar")
                         .HasColumnType("text");
 
                     b.Property<string>("Username")
@@ -290,7 +309,7 @@ namespace PhongPerfume.Migrations
 
                     b.HasOne("PhongPerfume.Models.Payment", "Payment")
                         .WithMany("Orders")
-                        .HasForeignKey("Payment_Id1")
+                        .HasForeignKey("Payment_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -302,7 +321,7 @@ namespace PhongPerfume.Migrations
 
                     b.HasOne("PhongPerfume.Models.Warranty", "Warranty")
                         .WithMany("Orders")
-                        .HasForeignKey("Warranty_Id1")
+                        .HasForeignKey("Warranty_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

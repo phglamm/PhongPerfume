@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhongPerfume.DTO.OrderDTO;
+using PhongPerfume.DTO.OrderItemsDTO;
 using PhongPerfume.Interface;
 using PhongPerfume.Models;
 
@@ -18,52 +19,106 @@ namespace PhongPerfume.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAllOrder()
+        public async Task<ActionResult<IEnumerable<OrderGetAll>>> GetAllOrder()
         {
             var Orders = await _orderRepository.GetAllOrdersAsync();
-            var OrdersDTO = Orders.Select(c => new OrderGetAll
+            var OrdersDTO = Orders.Select(o => new OrderGetAll
             {
-                Order_Id = c.Order_Id,
-                Order_Address = c.Order_Address,
-                Order_Status = c.Order_Status,
-                Total_Price = c.Total_Price,
-                User_Id = c.User_Id,
-                User = c.User,
-                Event_Id = c.Event_Id,
-                Event = c.Event,
-                Payment_Id = c.Payment_Id,
-                Payment = c.Payment,
-                Warranty_Id = c.Warranty_Id,
-                Warranty = c.Warranty,
-                OrderItems = c.OrderItems,
-
-
+                Order_Id = o.Order_Id,
+                Order_Date = o.Order_Date,
+                Order_customerName = o.Order_customerName,
+                Order_customerEmail = o.Order_customerEmail,
+                Order_customerPhone = o.Order_customerPhone,
+                Order_Address = o.Order_Address,
+                Order_Status = o.Order_Status,
+                Total_Price = o.Total_Price,
+                User_Id = o.User_Id,
+                User = new OrderUserReturnDTO
+                {
+                    User_Id = o.User.User_Id,
+                    User_avatar = o.User.Full_Name,
+                    Full_Name = o.User.Email,
+                    Gender = o.User.Gender,
+                    Phone = o.User.Phone,
+                    Address = o.User.Address,
+                    Username = o.User.Username,
+                    Reward_point = o.User.Reward_point,
+                    Role = o.User.Role,
+                },
+                Event_Id = o.Event_Id,
+                Event_Name = o.Event.Event_Name,
+                Payment_Id = o.Payment_Id,
+                Payment_Method = o.Payment.Payment_Method,
+                Warranty_Id = o.Warranty_Id,
+                Warranty_Name = o.Warranty.Warranty_Name,
+                OrderItems = o.OrderItems.Select(oi => new OrderItemsGetAll
+                {
+                    Order_Id = oi.Order_Id,
+                    Perfume_Id = oi.Perfume_Id,
+                    Perfume_Name = oi.Perfume.Perfume_Name,
+                    Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_Type = oi.Perfume.Perfume_Type,
+                    Perfume_images = oi.Perfume.Perfume_images,
+                    Size = oi.Perfume.Size,
+                    Stocks = oi.Perfume.Stocks,
+                    Price = oi.Perfume.Price,
+                    Brand_Id = oi.Perfume.Brand_Id,
+                    Brand_Name = oi.Perfume.Brand.Brand_Name,
+                    Quantity = oi.Quantity
+                }).ToList(),
             });
             return Ok(OrdersDTO);
         }
 
 
         [HttpGet("OrderFromUser/{userID}")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAllOrderFromUser(int userID)
+        public async Task<ActionResult<IEnumerable<OrderGetAll>>> GetAllOrderFromUser(int userID)
         {
             var Orders = await _orderRepository.GetAllOrdersFromUserAsync(userID);
-            var OrdersDTO = Orders.Select(c => new OrderGetAll
+            var OrdersDTO = Orders.Select(o => new OrderGetAll
             {
-                Order_Id = c.Order_Id,
-                Order_Address = c.Order_Address,
-                Order_Status = c.Order_Status,
-                Total_Price = c.Total_Price,
-                User_Id = c.User_Id,
-                User = c.User,
-                Event_Id = c.Event_Id,
-                Event = c.Event,
-                Payment_Id = c.Payment_Id,
-                Payment = c.Payment,
-                Warranty_Id = c.Warranty_Id,
-                Warranty = c.Warranty,
-                OrderItems = c.OrderItems,
-
-
+                Order_Id = o.Order_Id,
+                Order_Date = o.Order_Date,
+                Order_customerName = o.Order_customerName,
+                Order_customerEmail = o.Order_customerEmail,
+                Order_customerPhone = o.Order_customerPhone,
+                Order_Address = o.Order_Address,
+                Order_Status = o.Order_Status,
+                Total_Price = o.Total_Price,
+                User_Id = o.User_Id,
+                User = new OrderUserReturnDTO
+                {
+                    User_Id = o.User.User_Id,
+                    User_avatar = o.User.Full_Name,
+                    Full_Name = o.User.Email,
+                    Gender = o.User.Gender,
+                    Phone = o.User.Phone,
+                    Address = o.User.Address,
+                    Username = o.User.Username,
+                    Reward_point = o.User.Reward_point,
+                    Role = o.User.Role,
+                },
+                Event_Id = o.Event_Id,
+                Event_Name = o.Event.Event_Name,
+                Payment_Id = o.Payment_Id,
+                Payment_Method = o.Payment.Payment_Method,
+                Warranty_Id = o.Warranty_Id,
+                Warranty_Name = o.Warranty.Warranty_Name,
+                OrderItems = o.OrderItems.Select(oi => new OrderItemsGetAll
+                {
+                    Order_Id = oi.Order_Id,
+                    Perfume_Id = oi.Perfume_Id,
+                    Perfume_Name = oi.Perfume.Perfume_Name,
+                    Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_Type = oi.Perfume.Perfume_Type,
+                    Perfume_images = oi.Perfume.Perfume_images,
+                    Size = oi.Perfume.Size,
+                    Stocks = oi.Perfume.Stocks,
+                    Price = oi.Perfume.Price,
+                    Brand_Id = oi.Perfume.Brand_Id,
+                    Brand_Name = oi.Perfume.Brand.Brand_Name,
+                    Quantity = oi.Quantity
+                }).ToList(),
             });
             return Ok(OrdersDTO);
         }
@@ -76,36 +131,70 @@ namespace PhongPerfume.Controllers
             {
                 return NotFound($"Cannot find Brand with ID:{id}");
             }
+
             var selectedOrderDTO = new OrderGetAll
             {
                 Order_Id = selectedOrder.Order_Id,
+                Order_Date = selectedOrder.Order_Date,
+                Order_customerName = selectedOrder.Order_customerName,
+                Order_customerEmail = selectedOrder.Order_customerEmail,
+                Order_customerPhone = selectedOrder.Order_customerPhone,
                 Order_Address = selectedOrder.Order_Address,
                 Order_Status = selectedOrder.Order_Status,
                 Total_Price = selectedOrder.Total_Price,
                 User_Id = selectedOrder.User_Id,
-                User = selectedOrder.User,
+                User = new OrderUserReturnDTO
+                {
+                    User_Id = selectedOrder.User.User_Id,
+                    User_avatar = selectedOrder.User.Full_Name,
+                    Email = selectedOrder.User.Email,
+                    Full_Name = selectedOrder.User.Email,
+                    Gender = selectedOrder.User.Gender,
+                    Phone = selectedOrder.User.Phone,
+                    Address = selectedOrder.User.Address,
+                    Username = selectedOrder.User.Username,
+                    Reward_point = selectedOrder.User.Reward_point,
+                    Role = selectedOrder.User.Role,
+                },
                 Event_Id = selectedOrder.Event_Id,
-                Event = selectedOrder.Event,
+                Event_Name = selectedOrder.Event.Event_Name,
                 Payment_Id = selectedOrder.Payment_Id,
-                Payment = selectedOrder.Payment,
+                Payment_Method = selectedOrder.Payment.Payment_Method,
                 Warranty_Id = selectedOrder.Warranty_Id,
-                Warranty = selectedOrder.Warranty,
-                OrderItems = selectedOrder.OrderItems,
+                Warranty_Name = selectedOrder.Warranty.Warranty_Name,
+                OrderItems = selectedOrder.OrderItems.Select(oi => new OrderItemsGetAll
+                {
+                    Order_Id = oi.Order_Id,
+                    Perfume_Id = oi.Perfume_Id,
+                    Perfume_Name = oi.Perfume.Perfume_Name,
+                    Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_Type = oi.Perfume.Perfume_Type,
+                    Perfume_images = oi.Perfume.Perfume_images,
+                    Size = oi.Perfume.Size,
+                    Stocks = oi.Perfume.Stocks,
+                    Price = oi.Perfume.Price,
+                    Brand_Id = oi.Perfume.Brand_Id,
+                    Brand_Name = oi.Perfume.Brand.Brand_Name,
+                    Quantity = oi.Quantity
+                }).ToList(),
             };
             return Ok(selectedOrderDTO);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> AddOrder([FromBody] OrderPost orderPost)
+        public async Task<ActionResult<OrderGetAll>> AddOrder([FromBody] OrderPost orderPost)
         {
-            if (orderPost == null)
+            if (orderPost == null || orderPost.OrderItems == null || !orderPost.OrderItems.Any())
             {
-                return BadRequest("Order's Data is required");
+                return BadRequest("Order data and cart items are required");
             }
 
             var addOrder = new Order
             {
-
+                Order_Date = DateTime.UtcNow,
+                Order_customerName = orderPost.Order_customerName,
+                Order_customerEmail = orderPost.Order_customerEmail,
+                Order_customerPhone = orderPost.Order_customerPhone,
                 Order_Address = orderPost.Order_Address,
                 Order_Status = orderPost.Order_Status,
                 Total_Price = orderPost.Total_Price,
@@ -113,11 +202,69 @@ namespace PhongPerfume.Controllers
                 Event_Id = orderPost.Event_Id,
                 Payment_Id = orderPost.Payment_Id,
                 Warranty_Id = orderPost.Warranty_Id,
+                OrderItems = orderPost.OrderItems.Select(oi => new OrderItems
+                {
+                    Perfume_Id = oi.Perfume_Id,
+                    Quantity = oi.Quantity
+                }).ToList(),
             };
 
             var addedOrder = await _orderRepository.AddOrderAsync(addOrder);
-            System.Diagnostics.Debug.WriteLine($"{addedOrder.Order_Id}");
-            return CreatedAtAction(nameof(GetOrderById), new { id = addedOrder.Order_Id }, addedOrder);
+            if (addedOrder == null)
+            {
+                return BadRequest("Failed to add the order.");
+            }
+
+            var AfterAddOrder = new OrderGetAll
+            {
+                Order_Id = addedOrder.Order_Id,
+                Order_Date = addedOrder.Order_Date,
+                Order_customerName = addedOrder.Order_customerName,
+                Order_customerEmail = addedOrder.Order_customerEmail,
+                Order_customerPhone = addedOrder.Order_customerPhone,
+                Order_Address = addedOrder.Order_Address,
+                Order_Status = addedOrder.Order_Status,
+                Total_Price = addedOrder.Total_Price,
+                User_Id = addedOrder.User_Id,
+                User = new OrderUserReturnDTO
+                {
+                    User_Id = addedOrder.User.User_Id,
+                    User_avatar = addedOrder.User.Full_Name,
+                    Email = addedOrder.User.Email,
+                    Full_Name = addedOrder.User.Email,
+                    Gender = addedOrder.User.Gender,
+                    Phone = addedOrder.User.Phone,
+                    Address = addedOrder.User.Address,
+                    Username = addedOrder.User.Username,
+                    Reward_point = addedOrder.User.Reward_point,
+                    Role = addedOrder.User.Role,
+                },
+                Event_Id = addedOrder.Event_Id,
+                Event_Name = addedOrder.Event.Event_Name,
+                Payment_Id = addedOrder.Payment_Id,
+                Payment_Method = addedOrder.Payment.Payment_Method,
+                Warranty_Id = addedOrder.Warranty_Id,
+                Warranty_Name = addedOrder.Warranty.Warranty_Name,
+                OrderItems = addedOrder.OrderItems.Select(oi => new OrderItemsGetAll
+                {
+                    Order_Id = oi.Order_Id,
+                    Perfume_Id = oi.Perfume_Id,
+                    Perfume_Name = oi.Perfume.Perfume_Name,
+                    Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_Type = oi.Perfume.Perfume_Type,
+                    Perfume_images = oi.Perfume.Perfume_images,
+                    Size = oi.Perfume.Size,
+                    Stocks = oi.Perfume.Stocks,
+                    Price = oi.Perfume.Price,
+                    Brand_Id = oi.Perfume.Brand_Id,
+                    Brand_Name = oi.Perfume.Brand.Brand_Name,
+                    Quantity = oi.Quantity
+                }).ToList(),
+            };
+
+            System.Diagnostics.Debug.WriteLine($"{AfterAddOrder.Order_Id}");
+            return CreatedAtAction(nameof(GetOrderById), new { id = AfterAddOrder.Order_Id }, AfterAddOrder);
+
         }
 
         [HttpPut("{id}")]

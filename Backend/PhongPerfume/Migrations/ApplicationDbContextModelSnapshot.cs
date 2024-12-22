@@ -104,14 +104,19 @@ namespace PhongPerfume.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Order_customerEmail")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Order_customerName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Payment_Id")
-                        .HasColumnType("integer");
+                    b.Property<string>("Order_customerPhone")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<int>("Payment_Id1")
+                    b.Property<int>("Payment_Id")
                         .HasColumnType("integer");
 
                     b.Property<int>("Total_Price")
@@ -123,18 +128,15 @@ namespace PhongPerfume.Migrations
                     b.Property<int>("Warranty_Id")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Warranty_Id1")
-                        .HasColumnType("integer");
-
                     b.HasKey("Order_Id");
 
                     b.HasIndex("Event_Id");
 
-                    b.HasIndex("Payment_Id1");
+                    b.HasIndex("Payment_Id");
 
                     b.HasIndex("User_Id");
 
-                    b.HasIndex("Warranty_Id1");
+                    b.HasIndex("Warranty_Id");
 
                     b.ToTable("Orders");
                 });
@@ -147,14 +149,14 @@ namespace PhongPerfume.Migrations
                     b.Property<int>("Perfume_Id")
                         .HasColumnType("integer");
 
-                    b.Property<int>("OrderDetail_Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
                     b.HasKey("Order_Id", "Perfume_Id");
 
                     b.HasIndex("Perfume_Id");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("PhongPerfume.Models.Payment", b =>
@@ -249,10 +251,9 @@ namespace PhongPerfume.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("RefreshToken")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("RefreshTokenExpiry")
+                    b.Property<DateTime?>("RefreshTokenExpiry")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Reward_point")
@@ -263,7 +264,6 @@ namespace PhongPerfume.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("User_avatar")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Username")
@@ -306,7 +306,7 @@ namespace PhongPerfume.Migrations
 
                     b.HasOne("PhongPerfume.Models.Payment", "Payment")
                         .WithMany("Orders")
-                        .HasForeignKey("Payment_Id1")
+                        .HasForeignKey("Payment_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -318,7 +318,7 @@ namespace PhongPerfume.Migrations
 
                     b.HasOne("PhongPerfume.Models.Warranty", "Warranty")
                         .WithMany("Orders")
-                        .HasForeignKey("Warranty_Id1")
+                        .HasForeignKey("Warranty_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

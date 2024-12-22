@@ -321,7 +321,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[PhongPerfume.Models.Order, PhongPerfume, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PhongPerfume.DTO.OrderDTO.OrderGetAll, PhongPerfume, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -347,7 +347,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "PhongPerfume.Models.Order",
+        "Type": "PhongPerfume.DTO.OrderDTO.OrderGetAll",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -446,7 +446,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[PhongPerfume.Models.Order, PhongPerfume, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PhongPerfume.DTO.OrderDTO.OrderGetAll, PhongPerfume, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

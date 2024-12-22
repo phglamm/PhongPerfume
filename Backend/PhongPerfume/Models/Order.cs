@@ -7,9 +7,10 @@ namespace PhongPerfume.Models
     {
         [Key]
         public int Order_Id { get; set; }
-
         public DateTime Order_Date { get; set; }
         public string Order_customerName { get; set; }
+        public string Order_customerEmail { get; set; }
+        public string Order_customerPhone { get; set; }
         public string Order_Address { get; set; }
         public string Order_Status { get; set; }
         public int Total_Price { get; set; }
@@ -22,12 +23,12 @@ namespace PhongPerfume.Models
         [ForeignKey("Event_Id")]
         public Event Event { get; set; }
 
-        [ForeignKey("Payment_Id")]
         public int Payment_Id { get; set; }
+        [ForeignKey("Payment_Id")]
         public Payment Payment { get; set; }
 
-        [ForeignKey("Warranty_Id")]
         public int Warranty_Id { get; set; }
+        [ForeignKey("Warranty_Id")]
         public Warranty Warranty { get; set; }
 
         public ICollection<OrderItems> OrderItems { get; set; }

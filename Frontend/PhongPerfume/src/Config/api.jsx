@@ -27,7 +27,7 @@ const handleBefore = async (config) => {
     localStorage.removeItem("refreshToken");
     // dispatch(logout());
     // navigate(`/${route.login}`);
-    window.location = `/${route.login}`;
+    // window.location = `/${route.login}`;
     return Promise.reject("User logged out due to inactivity.");
   }
   if (accessToken) {
@@ -47,7 +47,7 @@ const handleBefore = async (config) => {
         console.error("Failed to refresh token:", error);
         // dispatch(logout());
         // navigate(`/${route.login}`);
-        window.location = `/${route.login}`;
+        // window.location = `/${route.login}`;
         return Promise.reject(error);
       }
       // Refresh the token

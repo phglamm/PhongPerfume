@@ -13,20 +13,21 @@ import { Layout, Menu, Typography, Dropdown, Button } from "antd";
 import { route } from "../../Routes";
 import { logout, selectUser } from "../../Redux/features/counterSlice";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "antd";
 const { Header } = Layout;
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 import "./HeaderComponent.scss";
+import { clearCart } from "../../Redux/features/cartSlice";
 
 export default function HeaderComponent() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const location = useLocation();
   const screens = useBreakpoint();
-
+  const navigate = useNavigate();
   const currentURI = location.pathname;
   const [selectedKey, setSelectedKey] = useState(currentURI);
 
@@ -69,10 +70,12 @@ export default function HeaderComponent() {
               <ShoppingCartOutlined />
             ),
           ]),
-          getItem("Logout", "/logout", <LogoutOutlined />, null, () => {
+          getItem("Logout", route.login, <LogoutOutlined />, null, () => {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-
+            dispatch(clearCart());
+            // dispatch(resetCart());
+            navigate(`/${route.login}`);
             dispatch(logout());
           }),
         ]

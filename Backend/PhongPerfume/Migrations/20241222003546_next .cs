@@ -5,7 +5,7 @@
 namespace PhongPerfume.Migrations
 {
     /// <inheritdoc />
-    public partial class update : Migration
+    public partial class next : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

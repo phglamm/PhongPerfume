@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PhongPerfume.DTO.BrandDTO;
 using PhongPerfume.Interface;
 using PhongPerfume.Models;
@@ -19,7 +18,7 @@ namespace PhongPerfume.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
 
         public async Task<ActionResult<IEnumerable<Brand>>> GetAllBrand()
         {

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -6,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace PhongPerfume.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class newinit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +19,7 @@ namespace PhongPerfume.Migrations
                 {
                     Brand_Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Brand_Images = table.Column<string>(type: "text", nullable: false),
                     Brand_Name = table.Column<string>(type: "text", nullable: false),
                     Brand_Description = table.Column<string>(type: "text", nullable: false)
                 },
@@ -31,6 +34,7 @@ namespace PhongPerfume.Migrations
                 {
                     Event_Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Event_Poster = table.Column<string>(type: "text", nullable: false),
                     Event_Name = table.Column<string>(type: "text", nullable: false),
                     Event_Start = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Event_End = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -61,6 +65,7 @@ namespace PhongPerfume.Migrations
                 {
                     User_Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    User_avatar = table.Column<string>(type: "text", nullable: true),
                     Full_Name = table.Column<string>(type: "text", nullable: false),
                     Gender = table.Column<bool>(type: "boolean", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
@@ -69,7 +74,9 @@ namespace PhongPerfume.Migrations
                     Username = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
                     Reward_point = table.Column<int>(type: "integer", nullable: false),
-                    Role = table.Column<string>(type: "text", nullable: false)
+                    Role = table.Column<string>(type: "text", nullable: false),
+                    RefreshToken = table.Column<string>(type: "text", nullable: true),
+                    RefreshTokenExpiry = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,6 +106,7 @@ namespace PhongPerfume.Migrations
                     Perfume_Name = table.Column<string>(type: "text", nullable: false),
                     Perfume_Description = table.Column<string>(type: "text", nullable: false),
                     Perfume_Type = table.Column<string>(type: "text", nullable: false),
+                    Perfume_images = table.Column<List<string>>(type: "text[]", nullable: false),
                     Size = table.Column<int>(type: "integer", nullable: false),
                     Stocks = table.Column<int>(type: "integer", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
@@ -122,15 +130,16 @@ namespace PhongPerfume.Migrations
                     Order_Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Order_Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Order_customerName = table.Column<string>(type: "text", nullable: false),
+                    Order_customerEmail = table.Column<string>(type: "text", nullable: false),
+                    Order_customerPhone = table.Column<string>(type: "text", nullable: false),
                     Order_Address = table.Column<string>(type: "text", nullable: false),
                     Order_Status = table.Column<string>(type: "text", nullable: false),
                     Total_Price = table.Column<int>(type: "integer", nullable: false),
                     User_Id = table.Column<int>(type: "integer", nullable: false),
                     Event_Id = table.Column<int>(type: "integer", nullable: false),
                     Payment_Id = table.Column<int>(type: "integer", nullable: false),
-                    Payment_Id1 = table.Column<int>(type: "integer", nullable: false),
-                    Warranty_Id = table.Column<int>(type: "integer", nullable: false),
-                    Warranty_Id1 = table.Column<int>(type: "integer", nullable: false)
+                    Warranty_Id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,8 +151,8 @@ namespace PhongPerfume.Migrations
                         principalColumn: "Event_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Payments_Payment_Id1",
-                        column: x => x.Payment_Id1,
+                        name: "FK_Orders_Payments_Payment_Id",
+                        column: x => x.Payment_Id,
                         principalTable: "Payments",
                         principalColumn: "Payment_Id",
                         onDelete: ReferentialAction.Cascade);
@@ -154,53 +163,32 @@ namespace PhongPerfume.Migrations
                         principalColumn: "User_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Warrantys_Warranty_Id1",
-                        column: x => x.Warranty_Id1,
+                        name: "FK_Orders_Warrantys_Warranty_Id",
+                        column: x => x.Warranty_Id,
                         principalTable: "Warrantys",
                         principalColumn: "Warranty_Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderDetails",
+                name: "OrderItems",
                 columns: table => new
                 {
-                    OrderDetail_Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Order_Id = table.Column<int>(type: "integer", nullable: false),
-                    OrderDetail_Quantity = table.Column<int>(type: "integer", nullable: false)
+                    Perfume_Id = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetail_Id);
+                    table.PrimaryKey("PK_OrderItems", x => new { x.Order_Id, x.Perfume_Id });
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_Order_Id",
+                        name: "FK_OrderItems_Orders_Order_Id",
                         column: x => x.Order_Id,
                         principalTable: "Orders",
                         principalColumn: "Order_Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderDetailPerfumes",
-                columns: table => new
-                {
-                    OrderDetailPerfume_Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    OrderDetail_Id = table.Column<int>(type: "integer", nullable: false),
-                    Perfume_Id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDetailPerfumes", x => x.OrderDetailPerfume_Id);
                     table.ForeignKey(
-                        name: "FK_OrderDetailPerfumes_OrderDetails_OrderDetail_Id",
-                        column: x => x.OrderDetail_Id,
-                        principalTable: "OrderDetails",
-                        principalColumn: "OrderDetail_Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetailPerfumes_Perfumes_Perfume_Id",
+                        name: "FK_OrderItems_Perfumes_Perfume_Id",
                         column: x => x.Perfume_Id,
                         principalTable: "Perfumes",
                         principalColumn: "Perfume_Id",
@@ -208,19 +196,9 @@ namespace PhongPerfume.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetailPerfumes_OrderDetail_Id",
-                table: "OrderDetailPerfumes",
-                column: "OrderDetail_Id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetailPerfumes_Perfume_Id",
-                table: "OrderDetailPerfumes",
+                name: "IX_OrderItems_Perfume_Id",
+                table: "OrderItems",
                 column: "Perfume_Id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_Order_Id",
-                table: "OrderDetails",
-                column: "Order_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_Event_Id",
@@ -228,9 +206,9 @@ namespace PhongPerfume.Migrations
                 column: "Event_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_Payment_Id1",
+                name: "IX_Orders_Payment_Id",
                 table: "Orders",
-                column: "Payment_Id1");
+                column: "Payment_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_User_Id",
@@ -238,9 +216,9 @@ namespace PhongPerfume.Migrations
                 column: "User_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_Warranty_Id1",
+                name: "IX_Orders_Warranty_Id",
                 table: "Orders",
-                column: "Warranty_Id1");
+                column: "Warranty_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Perfumes_Brand_Id",
@@ -252,19 +230,13 @@ namespace PhongPerfume.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OrderDetailPerfumes");
-
-            migrationBuilder.DropTable(
-                name: "OrderDetails");
-
-            migrationBuilder.DropTable(
-                name: "Perfumes");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Brands");
+                name: "Perfumes");
 
             migrationBuilder.DropTable(
                 name: "Events");
@@ -277,6 +249,9 @@ namespace PhongPerfume.Migrations
 
             migrationBuilder.DropTable(
                 name: "Warrantys");
+
+            migrationBuilder.DropTable(
+                name: "Brands");
         }
     }
 }
