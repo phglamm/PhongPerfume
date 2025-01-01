@@ -11,6 +11,9 @@ export const route = {
   cart: "cart",
   orderHistory: "order-history",
   checkout: "checkout",
+  ordersuccess: "order-successfully",
+  orderfailed: "order-failed",
+  ordertracking: "order-tracking",
 
   admin: "/admin",
   userManagement: "user-management",
@@ -20,4 +23,7 @@ export const route = {
   orderManagement: "order-management",
   warrantyManagement: "warranty-management",
   paymentManagement: "payment-management",
+
+  shipper: "shipper",
+  staff: "staff",
 };

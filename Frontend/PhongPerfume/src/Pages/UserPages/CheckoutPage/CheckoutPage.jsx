@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Form,
   Input,
@@ -10,22 +10,17 @@ import {
   message,
   Typography,
   Divider,
-  Modal,
   Image,
+  Space,
 } from "antd";
-import {
-  ShoppingCartOutlined,
-  CreditCardOutlined,
-  CheckCircleOutlined,
-  UserOutlined,
-  LockOutlined,
-} from "@ant-design/icons";
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../../Redux/features/cartSlice";
+import { clearCart, selectCartItems } from "../../../Redux/features/cartSlice";
 import api from "../../../Config/api";
 import { order } from "../../../Redux/features/orderSlice";
 import { selectUser } from "../../../Redux/features/counterSlice";
-// import "antd/dist/antd.css";
+import { useNavigate } from "react-router-dom";
+import { route } from "../../../Routes";
 
 const { Step } = Steps;
 const { Title, Text } = Typography;
@@ -33,7 +28,6 @@ const { Title, Text } = Typography;
 export default function CheckoutPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [form] = Form.useForm();
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const cartItems = useSelector(selectCartItems);
   const user = useSelector(selectUser);
@@ -49,11 +43,9 @@ export default function CheckoutPage() {
   const prev = () => {
     setCurrentStep(currentStep - 1);
   };
-  const dispatch = useDispatch();
-  const handleClickSubmit = () => {
-    form.submit();
-  };
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = async (values) => {
     message.success("Checkout successful!");
     values.order_Status = "Pending";
@@ -66,43 +58,46 @@ export default function CheckoutPage() {
     console.log(values);
     try {
       const response = await api.post("Order", values);
-      console.log(response.data);
+      console.log(response);
       dispatch(order(response.data));
+      navigate(`/${user?.username}/${route.ordersuccess}`);
+      dispatch(clearCart());
     } catch (error) {
-      console.log(error.response.data);
+      navigate(`/${user?.username}/${route.orderfailed}`);
+      message.error("Failed to place order. Please try again.");
     }
   };
 
-  const handleModalClose = () => {
-    setIsModalVisible(false);
-    setCurrentStep(0);
-  };
-
   return (
-    <div style={{ padding: "30px 20px", backgroundColor: "#f5f5f5" }}>
+    <div style={{ padding: "40px", backgroundColor: "#f9f9f9" }}>
       <Row justify="center">
-        <Col span={16}>
+        <Col span={18}>
           <Card
             bordered={false}
             style={{
-              borderRadius: "12px",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+              borderRadius: "16px",
+              boxShadow: "0px 6px 16px rgba(0, 0, 0, 0.1)",
+              padding: "20px",
+              backgroundColor: "#ffffff",
             }}
           >
             <Steps
               current={currentStep}
-              size="small"
-              style={{ marginBottom: "20px" }}
+              style={{ marginBottom: "30px" }}
+              labelPlacement="vertical"
             >
               <Step title="Cart" icon={<ShoppingCartOutlined />} />
               <Step title="User Info" icon={<UserOutlined />} />
-              <Step title="Payment" icon={<CreditCardOutlined />} />
-              <Step title="Complete" icon={<CheckCircleOutlined />} />
             </Steps>
 
             {currentStep === 0 && (
               <div>
-                <Title level={3}>Your Cart</Title>
+                <Title
+                  level={3}
+                  style={{ textAlign: "center", marginBottom: "20px" }}
+                >
+                  Your Shopping Cart
+                </Title>
                 {cartItems.map((item) => (
                   <Card
                     key={item.id}
@@ -111,26 +106,23 @@ export default function CheckoutPage() {
                   >
                     <Row gutter={16}>
                       <Col span={6}>
-                        {/* Replacing Avatar with product image */}
                         <Image
-                          width={64}
+                          width={80}
                           src={item.perfume_images[0]}
                           alt={item.perfume_Name}
+                          style={{ borderRadius: "8px" }}
                         />
                       </Col>
                       <Col span={12}>
-                        <Title level={4}>{item.perfume_Name}</Title>
-                        <Text>Brand: {item.brand_Name}</Text>
-                        <div>
+                        <Space direction="vertical" size={4}>
+                          <Text strong>{item.perfume_Name}</Text>
+                          <Text type="secondary">Brand: {item.brand_Name}</Text>
                           <Text>Size: {item.size}ml</Text>
-                        </div>
-                        <div>
-                          <Text strong>Price: ${item.price}</Text>
-                        </div>
-                        <div>
-                          {/* Display quantity of the item */}
+                          <Text strong>
+                            Price: ${item.price.toLocaleString()}
+                          </Text>
                           <Text>Quantity: {item.quantity}</Text>
-                        </div>
+                        </Space>
                       </Col>
                       <Col span={6} style={{ textAlign: "right" }}>
                         <Title level={4} style={{ marginTop: "15px" }}>
@@ -143,7 +135,10 @@ export default function CheckoutPage() {
                 <Divider />
                 <Row justify="end">
                   <Title level={4}>
-                    Total: ${totalAmount.toLocaleString()}
+                    Total:{" "}
+                    <span style={{ color: "#52c41a" }}>
+                      ${totalAmount.toLocaleString()}
+                    </span>
                   </Title>
                 </Row>
                 <Button
@@ -165,7 +160,12 @@ export default function CheckoutPage() {
                 onFinish={handleSubmit}
                 style={{ padding: "20px" }}
               >
-                <Title level={3}>Your Information</Title>
+                <Title
+                  level={3}
+                  style={{ textAlign: "center", marginBottom: "20px" }}
+                >
+                  Your Information
+                </Title>
                 <Form.Item
                   name="order_customerName"
                   label="Full Name"
@@ -173,7 +173,7 @@ export default function CheckoutPage() {
                     { required: true, message: "Please input your full name!" },
                   ]}
                 >
-                  <Input />
+                  <Input placeholder="John Doe" />
                 </Form.Item>
 
                 <Form.Item
@@ -186,7 +186,7 @@ export default function CheckoutPage() {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input placeholder="example@example.com" />
                 </Form.Item>
 
                 <Form.Item
@@ -199,7 +199,7 @@ export default function CheckoutPage() {
                     },
                   ]}
                 >
-                  <Input />
+                  <Input placeholder="123-456-7890" />
                 </Form.Item>
 
                 <Form.Item
@@ -218,135 +218,38 @@ export default function CheckoutPage() {
                   />
                 </Form.Item>
 
-                <Button
-                  type="primary"
-                  size="large"
-                  onClick={handleClickSubmit}
-                  block
-                >
-                  Proceed to Payment
-                </Button>
-              </Form>
-            )}
-
-            {/* {currentStep === 2 && (
-              <Form
-                form={form}
-                layout="vertical"
-                onFinish={handleSubmit}
-                style={{ padding: "20px" }}
-              >
-                <Title level={3}>Payment Information</Title>
-
-                <Form.Item
-                  name="cardholder"
-                  label="Cardholder's Name"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input the cardholder's name!",
-                    },
-                  ]}
-                >
-                  <Input placeholder="John Doe" />
-                </Form.Item>
-
-                <Form.Item
-                  name="cardNumber"
-                  label="Card Number"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your card number!",
-                    },
-                  ]}
-                >
-                  <Input placeholder="1234 5678 9876 5432" />
-                </Form.Item>
-
-                <Row gutter={16}>
-                  <Col span={12}>
-                    <Form.Item
-                      name="expirationDate"
-                      label="Expiration Date"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input the expiration date!",
-                        },
-                      ]}
-                    >
-                      <Input placeholder="MM/YY" />
-                    </Form.Item>
-                  </Col>
-
-                  <Col span={12}>
-                    <Form.Item
-                      name="cvv"
-                      label="CVV"
-                      rules={[
-                        { required: true, message: "Please input the CVV!" },
-                      ]}
-                    >
-                      <Input prefix={<LockOutlined />} placeholder="CVV" />
-                    </Form.Item>
-                  </Col>
+                <Row justify="space-between" style={{ marginTop: "20px" }}>
+                  <Button
+                    type="default"
+                    size="large"
+                    onClick={prev}
+                    style={{
+                      borderRadius: "8px",
+                      border: "1px solid #d9d9d9",
+                      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                    }}
+                  >
+                    Previous Step
+                  </Button>
+                  <Button
+                    type="primary"
+                    size="large"
+                    onClick={() => form.submit()}
+                    style={{
+                      borderRadius: "8px",
+                      backgroundColor: "#1890ff",
+                      borderColor: "#1890ff",
+                      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                    }}
+                  >
+                    Submit Order
+                  </Button>
                 </Row>
-
-                <Button type="primary" size="large" htmlType="submit" block>
-                  Confirm Payment
-                </Button>
               </Form>
-            )} */}
-
-            {currentStep === 2 && (
-              <div>
-                <Title level={3} style={{ textAlign: "center" }}>
-                  Order Complete
-                </Title>
-                <Text strong style={{ display: "block", marginBottom: "20px" }}>
-                  Thank you for your purchase! Your order will be processed
-                  shortly.
-                </Text>
-                <Button
-                  type="primary"
-                  size="large"
-                  block
-                  onClick={handleModalClose}
-                >
-                  Close
-                </Button>
-              </div>
             )}
-
-            <div style={{ marginTop: "20px", textAlign: "center" }}>
-              {currentStep > 0 && (
-                <Button style={{ marginRight: "8px" }} onClick={prev}>
-                  Previous
-                </Button>
-              )}
-              {currentStep < 3 && (
-                <Button type="primary" onClick={next}>
-                  Next
-                </Button>
-              )}
-            </div>
           </Card>
         </Col>
       </Row>
-
-      <Modal
-        title="Order Confirmation"
-        visible={isModalVisible}
-        footer={[
-          <Button key="ok" type="primary" onClick={handleModalClose}>
-            OK
-          </Button>,
-        ]}
-        onCancel={handleModalClose}
-      >
-        <Text>Your order has been placed successfully!</Text>
-      </Modal>
     </div>
   );
 }

@@ -26,8 +26,10 @@ namespace PhongPerfume.Controllers
                 Perfume_Id = c.Perfume_Id,
                 Perfume_Name = c.Perfume_Name,
                 Perfume_Description = c.Perfume_Description,
+                Perfume_For = c.Perfume_For,
                 Perfume_Type = c.Perfume_Type,
                 Perfume_images = c.Perfume_images,
+                Size = c.Size,
                 Stocks = c.Stocks,
                 Price = c.Price,
                 Brand_Id = c.Brand_Id,
@@ -49,6 +51,7 @@ namespace PhongPerfume.Controllers
                 Perfume_Id = selectedPerfume.Perfume_Id,
                 Perfume_Name = selectedPerfume.Perfume_Name,
                 Perfume_Description = selectedPerfume.Perfume_Description,
+                Perfume_For = selectedPerfume.Perfume_For,
                 Perfume_Type = selectedPerfume.Perfume_Type,
                 Perfume_images = selectedPerfume.Perfume_images,
                 Size = selectedPerfume.Size,
@@ -74,6 +77,7 @@ namespace PhongPerfume.Controllers
                 Perfume_Id = selectedPerfume.Perfume_Id,
                 Perfume_Name = selectedPerfume.Perfume_Name,
                 Perfume_Description = selectedPerfume.Perfume_Description,
+                Perfume_For = selectedPerfume.Perfume_For,
                 Perfume_Type = selectedPerfume.Perfume_Type,
                 Perfume_images = selectedPerfume.Perfume_images,
                 Size = selectedPerfume.Size,
@@ -98,6 +102,7 @@ namespace PhongPerfume.Controllers
             {
                 Perfume_Name = perfumePost.Perfume_Name,
                 Perfume_Description = perfumePost.Perfume_Description,
+                Perfume_For = perfumePost.Perfume_For,
                 Perfume_Type = perfumePost.Perfume_Type,
                 Perfume_images = perfumePost.Perfume_images,
                 Size = perfumePost.Size,
@@ -126,6 +131,7 @@ namespace PhongPerfume.Controllers
 
             ToUpdatePerfume.Perfume_Name = perfumePost.Perfume_Name;
             ToUpdatePerfume.Perfume_Description = perfumePost.Perfume_Description;
+            ToUpdatePerfume.Perfume_For = perfumePost.Perfume_For;
             ToUpdatePerfume.Perfume_Type = perfumePost.Perfume_Type;
             ToUpdatePerfume.Perfume_images = perfumePost.Perfume_images;
             ToUpdatePerfume.Size = perfumePost.Size;
@@ -147,6 +153,45 @@ namespace PhongPerfume.Controllers
             }
             await _perfumeRepository.DeletePerfumeAsync(id);
             return Ok("Delete Successfully");
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<PerfumeGetAll>> SearchPerfumes([FromQuery] string search)
+        {
+            if (string.IsNullOrEmpty(search))
+            {
+                return BadRequest(new { message = "Search query cannot be empty." });
+            }
+
+            try
+            {
+                var results = await _perfumeRepository.FindPerfumeBySearch(search);
+
+                if (results == null || results.Count == 0)
+                {
+                    return NotFound(new { message = "No perfumes found for the search query." });
+                }
+
+                var PerfumesDTO = results.Select(c => new PerfumeGetAll
+                {
+                    Perfume_Id = c.Perfume_Id,
+                    Perfume_Name = c.Perfume_Name,
+                    Perfume_Description = c.Perfume_Description,
+                    Perfume_For = c.Perfume_For,
+                    Perfume_Type = c.Perfume_Type,
+                    Perfume_images = c.Perfume_images,
+                    Size = c.Size,
+                    Stocks = c.Stocks,
+                    Price = c.Price,
+                    Brand_Id = c.Brand_Id,
+                    Brand_Name = c.Brand.Brand_Name
+                });
+                return Ok(PerfumesDTO);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred.", error = ex.Message });
+            }
         }
     }
 }

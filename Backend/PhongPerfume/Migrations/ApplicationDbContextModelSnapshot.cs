@@ -191,6 +191,10 @@ namespace PhongPerfume.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Perfume_For")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Perfume_Name")
                         .IsRequired()
                         .HasColumnType("text");

@@ -30,6 +30,10 @@ export default function LoginPage() {
         navigate(route.home);
       } else if (user.role === "admin") {
         navigate(`${route.admin}/${route.userManagement}`);
+      } else if (user.role === "shipper") {
+        navigate(route.shipper);
+      } else if (user.role === "staff") {
+        navigate(route.staff);
       }
       toast.success("Login Succesfully");
     } catch (error) {

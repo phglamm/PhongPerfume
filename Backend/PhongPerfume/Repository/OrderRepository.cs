@@ -91,7 +91,15 @@ namespace PhongPerfume.Repository
         {
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
-            return order;
+            return await _context.Orders
+        .Include(o => o.User)
+        .Include(o => o.Event)
+        .Include(o => o.Payment)
+        .Include(o => o.Warranty)
+        .Include(o => o.OrderItems)
+        .ThenInclude(oi => oi.Perfume)
+        .ThenInclude(p => p.Brand)
+        .FirstOrDefaultAsync(o => o.Order_Id == order.Order_Id);
         }
     }
 }

@@ -2,55 +2,72 @@ import React, { useEffect, useState } from "react";
 import { Table, Tag, Button } from "antd";
 
 import api from "../../../Config/Api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../Redux/features/counterSlice";
+import { route } from "../../../Routes";
 
 export default function OrderHistoryPage() {
-  const { id } = useParams();
+  const user = useSelector(selectUser);
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     // Fetch order history when the component mounts
     async function fetchUserOrders() {
-      const response = await api.get(`Order/OrderWithUser/${id}`);
-      setOrders(response.data);
-      console.log(response.data);
+      try {
+        setLoading(true);
+        const response = await api.get(`Order/OrderFromUser/${user.user_Id}`);
+        console.log(response.data);
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Failed to fetch order history", error);
+      } finally {
+        setLoading(false);
+      }
     }
-    setLoading(true);
+    fetchUserOrders();
   }, []);
 
   // Define columns for the orders table
   const columns = [
     {
       title: "Order ID",
-      dataIndex: "orderId",
-      key: "orderId",
+      dataIndex: "order_Id",
+      key: "order_Id",
     },
     {
       title: "Date",
-      dataIndex: "orderDate",
-      key: "orderDate",
+      dataIndex: "order_Date",
+      key: "order_Date",
       render: (text) => new Date(text).toLocaleDateString(),
     },
     {
       title: "Status",
-      dataIndex: "status",
-      key: "status",
+      dataIndex: "order_Status",
+      key: "order_Status",
       render: (status) => (
         <Tag color={status === "Delivered" ? "green" : "orange"}>{status}</Tag>
       ),
     },
     {
       title: "Total",
-      dataIndex: "totalPrice",
-      key: "totalPrice",
-      render: (price) => `$${price.toFixed(2)}`,
+      dataIndex: "total_Price",
+      key: "total_Price",
+      render: (value) => value.toLocaleString(),
     },
     {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Button type="link" onClick={() => viewOrderDetail(record.orderId)}>
+        // <Button type="link" onClick={() => viewOrderDetail(record.orderId)}>
+        //   View Details
+        // </Button>
+        <Button
+          type="link"
+          onClick={() => navigate(`/${route.ordertracking}/${record.order_Id}`)}
+        >
           View Details
         </Button>
       ),

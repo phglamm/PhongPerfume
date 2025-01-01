@@ -26,6 +26,7 @@ builder.Services.AddScoped<IPaymentRepository, PaymentRepository>(); // For scop
 builder.Services.AddScoped<IPerfumeRepository, PerfumeRepository>(); // For scoped lifetime
 builder.Services.AddScoped<IWarrantyRepository, WarrantyRepository>(); // For scoped lifetime
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddCors(options =>
 {
     //options.AddPolicy("AllowSpecificOrigins", policy =>

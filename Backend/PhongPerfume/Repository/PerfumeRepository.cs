@@ -31,6 +31,18 @@ namespace PhongPerfume.Repository
             }
         }
 
+        public async Task<List<Perfume>> FindPerfumeBySearch(string search)
+        {
+            return await _context.Perfumes
+                .Include(b => b.Brand)
+                .ThenInclude(p => p.Perfumes)
+                .Where(p =>
+                    EF.Functions.Like(p.Perfume_Name, $"%{search}%") ||
+                    EF.Functions.Like(p.Perfume_Description, $"%{search}%"))
+                .ToListAsync();
+
+        }
+
         public async Task<IEnumerable<Perfume>> GetAllPerfumesAsync()
         {
             return await _context.Perfumes.Include(b => b.Brand).ThenInclude(p => p.Perfumes).ToListAsync();

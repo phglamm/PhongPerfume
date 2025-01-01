@@ -9,6 +9,7 @@ namespace PhongPerfume.Models
         public int Perfume_Id { get; set; }
         public string Perfume_Name { get; set; }
         public string Perfume_Description { get; set; }
+        public string Perfume_For { get; set; }
         public string Perfume_Type { get; set; }
         public List<string> Perfume_images { get; set; } = new List<string>();
         public int Size { get; set; }

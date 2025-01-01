@@ -18,6 +18,18 @@ import { selectUser } from "./Redux/features/counterSlice";
 import RegisterPage from "./Pages/UserPages/RegisterPage/RegisterPage";
 import OrderHistoryPage from "./Pages/UserPages/OrderHistoryPage/OrderHistoryPage";
 import CheckoutPage from "./Pages/UserPages/CheckoutPage/CheckoutPage";
+import OrderSuccessPage from "./Pages/UserPages/OrderSuccessPage/OrderSuccessPage";
+import OrderFailedPage from "./Pages/UserPages/OrderFailedPage/OrderFailedPage";
+import OrderTrackingPage from "./Pages/UserPages/OrderTrackingPage/OrderTrackingPage";
+import OrderShipper from "./Pages/ShipperPages/OrderShipper/OrderShipper";
+import OrderStaff from "./Pages/StaffPages/OrderStaff/OrderStaff";
+import OrderManagement from "./Pages/AdminPages/OrderManagement/OrderManagement";
+import EventManagement from "./Pages/AdminPages/EventManagement/EventManagement";
+import WarrantyManagement from "./Pages/AdminPages/WarrantyManagement/WarrantyManagement";
+import PaymentManagement from "./Pages/AdminPages/PaymentManagement/PaymentManagement";
+import ShopMenPage from "./Pages/UserPages/ShopMenPage/ShopMenPage";
+import ShopWomenPage from "./Pages/UserPages/ShopWomenPage/ShopWomenPage";
+import ShopUnisexPage from "./Pages/UserPages/ShopUnisexPage/ShopUnisexPage";
 
 function App() {
   const user = useSelector(selectUser);
@@ -48,6 +60,19 @@ function App() {
           element: <DetailPage />,
         },
         {
+          path: `${route.shop}/men`,
+          element: <ShopMenPage />,
+        },
+        {
+          path: `${route.shop}/women`,
+          element: <ShopWomenPage />,
+        },
+        {
+          path: `${route.shop}/unisex`,
+          element: <ShopUnisexPage />,
+        },
+
+        {
           path: `${user?.username}/${route.cart}`,
           element: <CartPage />,
         },
@@ -58,6 +83,26 @@ function App() {
         {
           path: `${user?.username}/${route.checkout}`,
           element: <CheckoutPage />,
+        },
+        {
+          path: `${user?.username}/${route.ordersuccess}`,
+          element: <OrderSuccessPage />,
+        },
+        {
+          path: `${user?.username}/${route.orderfailed}`,
+          element: <OrderFailedPage />,
+        },
+        {
+          path: `${route.ordertracking}/:id`,
+          element: <OrderTrackingPage />,
+        },
+        {
+          path: route.shipper,
+          element: <OrderShipper />,
+        },
+        {
+          path: route.staff,
+          element: <OrderStaff />,
         },
       ],
     },
@@ -91,6 +136,38 @@ function App() {
           element: (
             <ProtectedRoute roles={["admin"]}>
               <BrandManagement />,
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: route.orderManagement,
+          element: (
+            <ProtectedRoute roles={["admin"]}>
+              <OrderManagement />,
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: route.eventManagement,
+          element: (
+            <ProtectedRoute roles={["admin"]}>
+              <EventManagement />,
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: route.warrantyManagement,
+          element: (
+            <ProtectedRoute roles={["admin"]}>
+              <WarrantyManagement />,
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: route.paymentManagement,
+          element: (
+            <ProtectedRoute roles={["admin"]}>
+              <PaymentManagement />,
             </ProtectedRoute>
           ),
         },

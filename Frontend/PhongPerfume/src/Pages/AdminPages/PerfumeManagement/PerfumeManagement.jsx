@@ -6,6 +6,7 @@ import {
   Image,
   Input,
   Modal,
+  Select,
   Table,
   Upload,
 } from "antd";
@@ -172,15 +173,19 @@ export default function PerfumeManagement() {
       onFilter: (value, record) => record.brand_Name.indexOf(value) === 0,
     },
     {
-      title: "Perfume's Description",
+      title: "Description",
       dataIndex: "perfume_Description",
     },
     {
-      title: "Perfume's Type",
+      title: "For",
+      dataIndex: "perfume_For",
+    },
+    {
+      title: "Type",
       dataIndex: "perfume_Type",
     },
     {
-      title: "Perfumes 's Images",
+      title: "Images",
       dataIndex: "perfume_images",
       render: (perfumes) => (
         <>
@@ -197,19 +202,19 @@ export default function PerfumeManagement() {
       ),
     },
     {
-      title: "Perfume's Size",
+      title: "Size",
       dataIndex: "size",
     },
     {
-      title: "Perfume's Stocks",
+      title: "Stocks",
       dataIndex: "stocks",
     },
     {
-      title: "Perfume's Price",
+      title: "Price",
       dataIndex: "price",
     },
     {
-      title: "Perfume's Brand",
+      title: "Brand",
       dataIndex: "brand_Name",
       showSorterTooltip: {
         target: "full-header",
@@ -348,6 +353,7 @@ export default function PerfumeManagement() {
     <div>
       <Button onClick={handleModalAdd}>Add Perfume</Button>
       <Table
+        style={{ width: "50%" }}
         loading={loading}
         columns={columns}
         dataSource={perfumes}
@@ -385,13 +391,30 @@ export default function PerfumeManagement() {
             <Input.TextArea rows={3} />
           </Form.Item>
           <Form.Item
+            name="perfume_For"
+            label="Perfume For"
+            rules={[{ required: true, message: "Please select" }]}
+          >
+            <Select>
+              <Select.Option value="Men">Men</Select.Option>
+              <Select.Option value="Women">Women</Select.Option>
+              <Select.Option value="Unisex">Unisex</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
             name="perfume_Type"
             label="Perfume Type"
             rules={[
               { required: true, message: "Please enter the perfume type" },
             ]}
           >
-            <Input />
+            <Select>
+              <Select.Option value="EDP">Eau de Parfum - EDP</Select.Option>
+              <Select.Option value="EDT">Eau de Toilette - EDT</Select.Option>
+              <Select.Option value="EDC">Eau de Cologne - EDC</Select.Option>
+              <Select.Option value="EF">Eau Fraîche - EF</Select.Option>
+              <Select.Option value="EDC">Parfum</Select.Option>
+            </Select>
           </Form.Item>
           <Form.Item name="perfume_images" label="Perfume Images">
             <Upload
@@ -482,13 +505,30 @@ export default function PerfumeManagement() {
             <Input.TextArea rows={3} />
           </Form.Item>
           <Form.Item
+            name="perfume_For"
+            label="Perfume For"
+            rules={[{ required: true, message: "Please select" }]}
+          >
+            <Select>
+              <Select.Option value="Men">Men</Select.Option>
+              <Select.Option value="Women">Women</Select.Option>
+              <Select.Option value="Unisex">Unisex</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
             name="perfume_Type"
             label="Perfume Type"
             rules={[
               { required: true, message: "Please enter the perfume type" },
             ]}
           >
-            <Input />
+            <Select>
+              <Select.Option value="EDP">Eau de Parfum - EDP</Select.Option>
+              <Select.Option value="EDT">Eau de Toilette - EDT</Select.Option>
+              <Select.Option value="EDC">Eau de Cologne - EDC</Select.Option>
+              <Select.Option value="EF">Eau Fraîche - EF</Select.Option>
+              <Select.Option value="EDC">Parfum</Select.Option>
+            </Select>
           </Form.Item>
           <Form.Item name="perfume_images" label="Perfume Images">
             <Upload

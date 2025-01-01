@@ -19,7 +19,7 @@ import { addToCart } from "../../../Redux/features/cartSlice";
 import { toast } from "react-toastify";
 import { Container } from "react-bootstrap";
 const { Title, Text } = Typography;
-
+import "./DetailPage.scss";
 export default function DetailPage() {
   const { id } = useParams();
   const [perfume, setPerfume] = useState(null);
@@ -115,7 +115,7 @@ export default function DetailPage() {
                 <Col span={12}>
                   <Text strong>Price:</Text>
                   <p style={{ color: "#d4380d", fontSize: "18px" }}>
-                    ${perfume.price}
+                    ${perfume.price.toLocaleString()}
                   </p>
                 </Col>
                 <Col span={12}>

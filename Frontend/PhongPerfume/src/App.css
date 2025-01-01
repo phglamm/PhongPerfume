@@ -10,3 +10,7 @@
   color: inherit !important; /* Maintain color on hover */
   text-decoration: none !important; /* Remove underline on hover */
 }
+
+.card-images {
+  height: 250px !important;
+}

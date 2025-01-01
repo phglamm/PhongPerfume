@@ -22,7 +22,11 @@ export default function Homepage() {
 
     async function fetchNewArrivals() {
       const response = await api.get("Perfume");
-      setPerfumes(response.data);
+      const filterPerfumes = response.data.sort(
+        (a, b) => b.perfume_Id - a.perfume_Id
+      );
+      console.log(filterPerfumes);
+      setPerfumes(filterPerfumes);
       console.log(response.data);
     }
 
@@ -83,7 +87,7 @@ export default function Homepage() {
               >
                 <Card.Meta
                   title={perfume.perfume_Name}
-                  description={`$${perfume.price}`}
+                  description={`$${perfume.price.toLocaleString()}`}
                 />
               </Card>
             </Link>

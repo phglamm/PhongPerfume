@@ -11,5 +11,7 @@ namespace PhongPerfume.Interface
         Task<Perfume> AddPerfumeAsync(Perfume perfume);
         Task<Perfume> UpdatePerfumeAsync(Perfume perfume);
         Task DeletePerfumeAsync(int id);
+        Task<List<Perfume>> FindPerfumeBySearch(string search);
+
     }
 }

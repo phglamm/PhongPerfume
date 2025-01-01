@@ -57,6 +57,7 @@ namespace PhongPerfume.Controllers
                     Perfume_Id = oi.Perfume_Id,
                     Perfume_Name = oi.Perfume.Perfume_Name,
                     Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_For = oi.Perfume.Perfume_For,
                     Perfume_Type = oi.Perfume.Perfume_Type,
                     Perfume_images = oi.Perfume.Perfume_images,
                     Size = oi.Perfume.Size,
@@ -110,6 +111,7 @@ namespace PhongPerfume.Controllers
                     Perfume_Id = oi.Perfume_Id,
                     Perfume_Name = oi.Perfume.Perfume_Name,
                     Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_For = oi.Perfume.Perfume_For,
                     Perfume_Type = oi.Perfume.Perfume_Type,
                     Perfume_images = oi.Perfume.Perfume_images,
                     Size = oi.Perfume.Size,
@@ -168,6 +170,7 @@ namespace PhongPerfume.Controllers
                     Perfume_Id = oi.Perfume_Id,
                     Perfume_Name = oi.Perfume.Perfume_Name,
                     Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_For = oi.Perfume.Perfume_For,
                     Perfume_Type = oi.Perfume.Perfume_Type,
                     Perfume_images = oi.Perfume.Perfume_images,
                     Size = oi.Perfume.Size,
@@ -251,6 +254,7 @@ namespace PhongPerfume.Controllers
                     Perfume_Id = oi.Perfume_Id,
                     Perfume_Name = oi.Perfume.Perfume_Name,
                     Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_For = oi.Perfume.Perfume_For,
                     Perfume_Type = oi.Perfume.Perfume_Type,
                     Perfume_images = oi.Perfume.Perfume_images,
                     Size = oi.Perfume.Size,
@@ -303,6 +307,73 @@ namespace PhongPerfume.Controllers
             }
             await _orderRepository.DeleteOrderAsync(id);
             return Ok("Delete Successfully");
+        }
+
+        [HttpPut("UpdateOrderStatus/{id}")]
+        public async Task<ActionResult<OrderGetAll>> UpdateOrderStatus(int id, [FromQuery] string updateorderstatus)
+        {
+            var ToUpdateOrder = await _orderRepository.GetOrderByIdAsync(id);
+            if (ToUpdateOrder == null)
+            {
+                return NotFound($"Cannot find Order with ID:{id}");
+            }
+            if (updateorderstatus == null)
+            {
+                return BadRequest("Status's Data is required");
+            }
+
+            ToUpdateOrder.Order_Status = updateorderstatus;
+
+            var UpdatedOrder = await _orderRepository.UpdateOrderAsync(ToUpdateOrder);
+
+            var AfterUpdatedOrder = new OrderGetAll
+            {
+                Order_Id = UpdatedOrder.Order_Id,
+                Order_Date = UpdatedOrder.Order_Date,
+                Order_customerName = UpdatedOrder.Order_customerName,
+                Order_customerEmail = UpdatedOrder.Order_customerEmail,
+                Order_customerPhone = UpdatedOrder.Order_customerPhone,
+                Order_Address = UpdatedOrder.Order_Address,
+                Order_Status = UpdatedOrder.Order_Status,
+                Total_Price = UpdatedOrder.Total_Price,
+                User_Id = UpdatedOrder.User_Id,
+                User = new OrderUserReturnDTO
+                {
+                    User_Id = UpdatedOrder.User.User_Id,
+                    User_avatar = UpdatedOrder.User.Full_Name,
+                    Email = UpdatedOrder.User.Email,
+                    Full_Name = UpdatedOrder.User.Email,
+                    Gender = UpdatedOrder.User.Gender,
+                    Phone = UpdatedOrder.User.Phone,
+                    Address = UpdatedOrder.User.Address,
+                    Username = UpdatedOrder.User.Username,
+                    Reward_point = UpdatedOrder.User.Reward_point,
+                    Role = UpdatedOrder.User.Role,
+                },
+                Event_Id = UpdatedOrder.Event_Id,
+                Event_Name = UpdatedOrder.Event.Event_Name,
+                Payment_Id = UpdatedOrder.Payment_Id,
+                Payment_Method = UpdatedOrder.Payment.Payment_Method,
+                Warranty_Id = UpdatedOrder.Warranty_Id,
+                Warranty_Name = UpdatedOrder.Warranty.Warranty_Name,
+                OrderItems = UpdatedOrder.OrderItems.Select(oi => new OrderItemsGetAll
+                {
+                    Order_Id = oi.Order_Id,
+                    Perfume_Id = oi.Perfume_Id,
+                    Perfume_Name = oi.Perfume.Perfume_Name,
+                    Perfume_Description = oi.Perfume.Perfume_Description,
+                    Perfume_For = oi.Perfume.Perfume_For,
+                    Perfume_Type = oi.Perfume.Perfume_Type,
+                    Perfume_images = oi.Perfume.Perfume_images,
+                    Size = oi.Perfume.Size,
+                    Stocks = oi.Perfume.Stocks,
+                    Price = oi.Perfume.Price,
+                    Brand_Id = oi.Perfume.Brand_Id,
+                    Brand_Name = oi.Perfume.Brand.Brand_Name,
+                    Quantity = oi.Quantity
+                }).ToList(),
+            };
+            return Ok(AfterUpdatedOrder);
         }
     }
 }

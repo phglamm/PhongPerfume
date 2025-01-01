@@ -8,8 +8,9 @@ import {
   ShoppingCartOutlined,
   LogoutOutlined,
   MenuOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Typography, Dropdown, Button } from "antd";
+import { Layout, Menu, Typography, Dropdown, Button, Input, Col } from "antd";
 import { route } from "../../Routes";
 import { logout, selectUser } from "../../Redux/features/counterSlice";
 import { useEffect, useState } from "react";
@@ -30,6 +31,7 @@ export default function HeaderComponent() {
   const navigate = useNavigate();
   const currentURI = location.pathname;
   const [selectedKey, setSelectedKey] = useState(currentURI);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setSelectedKey(currentURI);
@@ -74,7 +76,6 @@ export default function HeaderComponent() {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
             dispatch(clearCart());
-            // dispatch(resetCart());
             navigate(`/${route.login}`);
             dispatch(logout());
           }),
@@ -109,7 +110,9 @@ export default function HeaderComponent() {
       return;
     }
   };
-
+  const handleSearch = () => {
+    navigate(`${route.shop}?search=${encodeURIComponent(searchQuery)}`);
+  };
   return (
     <>
       <Header
@@ -131,6 +134,27 @@ export default function HeaderComponent() {
         >
           Perfume Paradise
         </Title>
+
+        <Col>
+          <Input
+            placeholder="Search perfumes..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onPressEnter={handleSearch}
+            suffix={
+              <Button
+                type="text"
+                icon={<SearchOutlined />}
+                onClick={handleSearch}
+              />
+            }
+            style={{
+              width: "100%",
+              maxWidth: screens.md ? "400px" : "100%",
+            }}
+          />
+        </Col>
+
         {screens.md ? (
           <Menu
             mode="horizontal"
