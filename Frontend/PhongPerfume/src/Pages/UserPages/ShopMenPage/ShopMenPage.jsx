@@ -66,13 +66,22 @@ export default function ShopMenPage() {
       setLoading(false); // Hide loader after filters are applied
     }, 500); // Simulate a delay for demonstration
   };
-
+  const clearFilters = () => {
+    setFilters({
+      brand: null,
+      type: null,
+    });
+    setPriceRange([0, 50000]);
+    setFilteredPerfumes(perfumes);
+  };
   return (
     <Container style={{ padding: "20px" }}>
       {/* Filter Section */}
       <Row gutter={[16, 16]} style={{ marginBottom: "20px" }}>
         <Col span={6}>
           <Select
+            value={filters.brand}
+            allowClear
             placeholder="Select Brand"
             style={{ width: "100%" }}
             onChange={(value) => handleFilterChange("brand", value)}
@@ -88,6 +97,8 @@ export default function ShopMenPage() {
         </Col>
         <Col span={6}>
           <Select
+            value={filters.type}
+            allowClear
             placeholder="Select Type"
             style={{ width: "100%" }}
             onChange={(value) => handleFilterChange("type", value)}
@@ -111,9 +122,14 @@ export default function ShopMenPage() {
             onChange={setPriceRange}
           />
         </Col>
-        <Col span={4}>
+        <Col span={2}>
           <Button type="primary" onClick={applyFilters} block>
-            Apply Filters
+            Apply
+          </Button>
+        </Col>
+        <Col span={2}>
+          <Button onClick={clearFilters} block>
+            Clear
           </Button>
         </Col>
       </Row>

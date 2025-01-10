@@ -1,6 +1,7 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { route } from "../Routes";
+import Cookies from "js-cookie";
 
 import { logout } from "../Redux/features/counterSlice";
 import { useNavigate } from "react-router-dom";
@@ -18,14 +19,16 @@ const api = axios.create(config);
 api.defaults.baseURL = baseUrl;
 
 const handleBefore = async (config) => {
-  let accessToken = localStorage.getItem("accessToken")?.replaceAll('"', "");
+  // let accessToken = localStorage.getItem("accessToken")?.replaceAll('"', "");
+  let accessToken = Cookies.get("accessToken")?.replaceAll('"', "");
   const timeSinceLastRequest = Date.now() - lastRequestTime;
   if (timeSinceLastRequest > INACTIVITY_TIMEOUT) {
     // If inactivity period exceeds the threshold, log the user out
     console.log("User has been inactive for more than 3 hours. Logging out.");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    // dispatch(logout());
+    // localStorage.removeItem("accessToken");
+    // localStorage.removeItem("refreshToken");
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken"); // dispatch(logout());
     // navigate(`/${route.login}`);
     // window.location = `/${route.login}`;
     return Promise.reject("User logged out due to inactivity.");
@@ -34,15 +37,25 @@ const handleBefore = async (config) => {
     const tokenExpiry = jwtDecode(accessToken).exp * 1000;
     if (Date.now() >= tokenExpiry) {
       try {
-        const refreshToken = localStorage.getItem("refreshToken");
+        // const refreshToken = localStorage.getItem("refreshToken");
+        const refreshToken = Cookies.get("refreshToken");
+
         const encodedRefreshToken = encodeURIComponent(refreshToken);
         const response = await axios.post(
           `https://localhost:5001/api/Authentication/refresh-token?refreshToken=${encodedRefreshToken}`
         );
         console.log(response);
         accessToken = response.data.token;
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
+        // localStorage.setItem("accessToken", accessToken);
+        // localStorage.setItem("refreshToken", response.data.refreshToken);
+        Cookies.set("accessToken", response.data?.token, {
+          expires: 7,
+          secure: true,
+        }); // Expires in 7 days
+        Cookies.set("refreshToken", response.data?.refreshToken, {
+          expires: 7,
+          secure: true,
+        });
       } catch (error) {
         console.error("Failed to refresh token:", error);
         // dispatch(logout());

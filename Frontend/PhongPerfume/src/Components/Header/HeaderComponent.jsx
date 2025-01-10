@@ -22,6 +22,8 @@ const { Title } = Typography;
 const { useBreakpoint } = Grid;
 import "./HeaderComponent.scss";
 import { clearCart } from "../../Redux/features/cartSlice";
+import api from "../../Config/api";
+import Cookies from "js-cookie";
 
 export default function HeaderComponent() {
   const dispatch = useDispatch();
@@ -73,8 +75,11 @@ export default function HeaderComponent() {
             ),
           ]),
           getItem("Logout", route.login, <LogoutOutlined />, null, () => {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
+            // localStorage.removeItem("accessToken");
+            // localStorage.removeItem("refreshToken");
+            Cookies.remove("accessToken");
+            Cookies.remove("refreshToken");
+
             dispatch(clearCart());
             navigate(`/${route.login}`);
             dispatch(logout());
@@ -110,8 +115,10 @@ export default function HeaderComponent() {
       return;
     }
   };
-  const handleSearch = () => {
-    navigate(`${route.shop}?search=${encodeURIComponent(searchQuery)}`);
+  const handleSearch = async () => {
+    navigate(
+      `${route.shop}/search?search=${encodeURIComponent(searchQuery.trim())}`
+    );
   };
   return (
     <>
@@ -135,25 +142,24 @@ export default function HeaderComponent() {
           Perfume Paradise
         </Title>
 
-        <Col>
-          <Input
-            placeholder="Search perfumes..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onPressEnter={handleSearch}
-            suffix={
-              <Button
-                type="text"
-                icon={<SearchOutlined />}
-                onClick={handleSearch}
-              />
-            }
-            style={{
-              width: "100%",
-              maxWidth: screens.md ? "400px" : "100%",
-            }}
-          />
-        </Col>
+        <Input
+          placeholder="Search perfumes..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onPressEnter={handleSearch}
+          suffix={
+            <Button
+              type="text"
+              icon={<SearchOutlined />}
+              onClick={handleSearch}
+            />
+          }
+          style={{
+            marginLeft: 10,
+            width: "auto",
+            maxWidth: screens.md ? "300px" : "100%",
+          }}
+        />
 
         {screens.md ? (
           <Menu

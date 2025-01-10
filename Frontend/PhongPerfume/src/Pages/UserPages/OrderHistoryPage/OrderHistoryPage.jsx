@@ -19,8 +19,11 @@ export default function OrderHistoryPage() {
       try {
         setLoading(true);
         const response = await api.get(`Order/OrderFromUser/${user.user_Id}`);
+        const sortedOrder = response.data.sort(
+          (a, b) => b.order_Id - a.order_Id
+        );
         console.log(response.data);
-        setOrders(response.data);
+        setOrders(sortedOrder);
       } catch (error) {
         console.error("Failed to fetch order history", error);
       } finally {
@@ -75,10 +78,6 @@ export default function OrderHistoryPage() {
   ];
 
   // Function to handle viewing order details
-  const viewOrderDetail = (orderId) => {
-    console.log(`Viewing details for order: ${orderId}`);
-    // Redirect to order detail page or display a modal with order details
-  };
 
   return (
     <Container>

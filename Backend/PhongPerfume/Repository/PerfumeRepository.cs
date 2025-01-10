@@ -33,12 +33,16 @@ namespace PhongPerfume.Repository
 
         public async Task<List<Perfume>> FindPerfumeBySearch(string search)
         {
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                return await _context.Perfumes.Include(b => b.Brand).ThenInclude(p => p.Perfumes).ToListAsync();
+            }
             return await _context.Perfumes
                 .Include(b => b.Brand)
                 .ThenInclude(p => p.Perfumes)
                 .Where(p =>
                     EF.Functions.Like(p.Perfume_Name, $"%{search}%") ||
-                    EF.Functions.Like(p.Perfume_Description, $"%{search}%"))
+                EF.Functions.Like(p.Brand.Brand_Name, $"%{search}%"))
                 .ToListAsync();
 
         }

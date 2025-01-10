@@ -156,15 +156,17 @@ namespace PhongPerfume.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<PerfumeGetAll>> SearchPerfumes([FromQuery] string search)
+        public async Task<ActionResult<PerfumeGetAll>> SearchPerfumes([FromQuery] string? search)
         {
-            if (string.IsNullOrEmpty(search))
-            {
-                return BadRequest(new { message = "Search query cannot be empty." });
-            }
+            //if (string.IsNullOrEmpty(search))
+            //{
+            //    return BadRequest(new { message = "Search query cannot be empty." });
+            //}
 
             try
             {
+                search = string.IsNullOrWhiteSpace(search) ? null : search;
+
                 var results = await _perfumeRepository.FindPerfumeBySearch(search);
 
                 if (results == null || results.Count == 0)

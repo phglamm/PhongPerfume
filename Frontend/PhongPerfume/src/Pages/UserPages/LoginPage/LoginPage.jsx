@@ -10,6 +10,7 @@ import { auth, provider } from "../../../Config/firebase";
 import api from "../../../Config/api";
 import GoogleButton from "react-google-button";
 import { Container } from "react-bootstrap";
+import Cookies from "js-cookie";
 
 const { Title } = Typography;
 export default function LoginPage() {
@@ -21,9 +22,16 @@ export default function LoginPage() {
     try {
       const response = await api.post("Authentication/login", values);
       console.log(response);
-      localStorage.setItem("accessToken", response.data?.token);
-      localStorage.setItem("refreshToken", response.data?.refreshToken);
-
+      // localStorage.setItem("accessToken", response.data?.token);
+      // localStorage.setItem("refreshToken", response.data?.refreshToken);
+      Cookies.set("accessToken", response.data?.token, {
+        expires: 7,
+        secure: true,
+      }); // Expires in 7 days
+      Cookies.set("refreshToken", response.data?.refreshToken, {
+        expires: 7,
+        secure: true,
+      });
       const user = response.data?.user;
       dispatch(login(user));
       if (user.role === "customer") {

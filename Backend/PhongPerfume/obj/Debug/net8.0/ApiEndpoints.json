@@ -897,6 +897,37 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PhongPerfume.Controllers.UserController",
+    "Method": "EditProfileUser",
+    "RelativePath": "api/User/EditProfile/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userEditProfile",
+        "Type": "PhongPerfume.DTO.UserDTO.UserEditProfile",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PhongPerfume.Models.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "PhongPerfume.Controllers.WarrantyController",
     "Method": "GetAllwarranty",
     "RelativePath": "api/Warranty",

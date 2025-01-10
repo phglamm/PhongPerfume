@@ -118,6 +118,30 @@ namespace PhongPerfume.Controllers
             return Ok(UpdatedUser);
         }
 
+        [HttpPut("EditProfile/{id}")]
+        public async Task<ActionResult<User>> EditProfileUser(int id, [FromBody] UserEditProfile userEditProfile)
+        {
+            var ToUpdateUser = await _userRepository.GetUserByIdAsync(id);
+            if (ToUpdateUser == null)
+            {
+                return NotFound($"Cannot find User with ID:{id}");
+            }
+            if (userEditProfile == null)
+            {
+                return BadRequest("User's Data is required");
+            }
+
+            ToUpdateUser.User_avatar = userEditProfile.User_avatar;
+            ToUpdateUser.Full_Name = userEditProfile.Full_Name;
+            ToUpdateUser.Gender = userEditProfile.Gender;
+            ToUpdateUser.Phone = userEditProfile.Phone;
+            ToUpdateUser.Email = userEditProfile.Email;
+            ToUpdateUser.Address = userEditProfile.Address;
+
+            var UpdatedUser = await _userRepository.UpdateUserAsync(ToUpdateUser);
+            return Ok(UpdatedUser);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {

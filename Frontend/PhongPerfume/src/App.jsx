@@ -30,6 +30,8 @@ import PaymentManagement from "./Pages/AdminPages/PaymentManagement/PaymentManag
 import ShopMenPage from "./Pages/UserPages/ShopMenPage/ShopMenPage";
 import ShopWomenPage from "./Pages/UserPages/ShopWomenPage/ShopWomenPage";
 import ShopUnisexPage from "./Pages/UserPages/ShopUnisexPage/ShopUnisexPage";
+import ShopSearchPage from "./Pages/UserPages/ShopSearchPage/ShopSearchPage";
+import ProfilePage from "./Pages/UserPages/ProfilePage/ProfilePage";
 
 function App() {
   const user = useSelector(selectUser);
@@ -71,6 +73,14 @@ function App() {
           path: `${route.shop}/unisex`,
           element: <ShopUnisexPage />,
         },
+        {
+          path: `${route.shop}/search`,
+          element: <ShopSearchPage />,
+        },
+        {
+          path: `${route.shop}/search/page/:pageNumber`,
+          element: <ShopSearchPage />,
+        },
 
         {
           path: `${user?.username}/${route.cart}`,
@@ -103,6 +113,10 @@ function App() {
         {
           path: route.staff,
           element: <OrderStaff />,
+        },
+        {
+          path: `${user?.username}/${route.profile}`,
+          element: <ProfilePage />,
         },
       ],
     },
