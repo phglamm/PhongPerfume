@@ -33,7 +33,14 @@ namespace PhongPerfume.Controllers
                 Stocks = c.Stocks,
                 Price = c.Price,
                 Brand_Id = c.Brand_Id,
-                Brand_Name = c.Brand.Brand_Name
+                Brand_Name = c.Brand.Brand_Name,
+                Event_Id = c.Event_Id,
+                Event_Name = c.Event_Id > 0 ? c.Event.Event_Name : null,
+                Event_Poster = c.Event_Id > 0 ? c.Event.Event_Poster : null,
+                Event_Discount = c.Event_Id > 0 ? c.Event.Event_Discount : (int?)null,
+                Event_Start = c.Event_Id > 0 ? c.Event.Event_Start : (DateTime?)null,
+                Event_End = c.Event_Id > 0 ? c.Event.Event_End : (DateTime?)null,
+                Event_Voucher = c.Event_Id > 0 ? c.Event.Event_Voucher : null
             });
             return Ok(PerfumesDTO);
         }
@@ -58,7 +65,14 @@ namespace PhongPerfume.Controllers
                 Stocks = selectedPerfume.Stocks,
                 Price = selectedPerfume.Price,
                 Brand_Id = selectedPerfume.Brand_Id,
-                Brand_Name = selectedPerfume.Brand.Brand_Name
+                Brand_Name = selectedPerfume.Brand.Brand_Name,
+                Event_Id = selectedPerfume.Event != null ? selectedPerfume.Event.Event_Id : (int?)null, // Check if Event is null
+                Event_Name = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Name : null,
+                Event_Poster = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Poster : null,
+                Event_Discount = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Discount : (int?)null,
+                Event_Start = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Start : (DateTime?)null,
+                Event_End = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_End : (DateTime?)null,
+                Event_Voucher = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Voucher : null
 
             };
             return Ok(selectedPerfumeDTO);
@@ -67,7 +81,7 @@ namespace PhongPerfume.Controllers
         [HttpGet("PerfumeWithBrandName/{id}")]
         public async Task<ActionResult<PerfumeGetAll>> GetPerfumeWithBrandNameById(int id)
         {
-            var selectedPerfume = await _perfumeRepository.GetPerfumeWithBrandNameByIdAsync(id);
+            var selectedPerfume = await _perfumeRepository.GetPerfumeWithBrandNameEventByIdAsync(id);
             if (selectedPerfume == null)
             {
                 return NotFound($"Cannot find User with ID:{id}");
@@ -84,7 +98,14 @@ namespace PhongPerfume.Controllers
                 Stocks = selectedPerfume.Stocks,
                 Price = selectedPerfume.Price,
                 Brand_Id = selectedPerfume.Brand_Id,
-                Brand_Name = selectedPerfume.Brand.Brand_Name
+                Brand_Name = selectedPerfume.Brand.Brand_Name,
+                Event_Id = selectedPerfume.Event != null ? selectedPerfume.Event.Event_Id : (int?)null, // Check if Event is null
+                Event_Name = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Name : null,
+                Event_Poster = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Poster : null,
+                Event_Discount = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Discount : (int?)null,
+                Event_Start = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Start : (DateTime?)null,
+                Event_End = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_End : (DateTime?)null,
+                Event_Voucher = selectedPerfume.Event_Id > 0 ? selectedPerfume.Event.Event_Voucher : null
 
             };
             return Ok(selectedPerfumeDTO);
@@ -109,6 +130,7 @@ namespace PhongPerfume.Controllers
                 Stocks = perfumePost.Stocks,
                 Price = perfumePost.Price,
                 Brand_Id = perfumePost.Brand_Id,
+                Event_Id = perfumePost.Event_Id,
             };
 
             var addedPerfume = await _perfumeRepository.AddPerfumeAsync(addPerfume);
@@ -138,6 +160,7 @@ namespace PhongPerfume.Controllers
             ToUpdatePerfume.Stocks = perfumePost.Stocks;
             ToUpdatePerfume.Price = perfumePost.Price;
             ToUpdatePerfume.Brand_Id = perfumePost.Brand_Id;
+            ToUpdatePerfume.Event_Id = perfumePost.Event_Id;
 
             var UpdatedPerfume = await _perfumeRepository.UpdatePerfumeAsync(ToUpdatePerfume);
             return Ok(UpdatedPerfume);
@@ -186,7 +209,14 @@ namespace PhongPerfume.Controllers
                     Stocks = c.Stocks,
                     Price = c.Price,
                     Brand_Id = c.Brand_Id,
-                    Brand_Name = c.Brand.Brand_Name
+                    Brand_Name = c.Brand.Brand_Name,
+                    Event_Id = c.Event.Event_Id,
+                    Event_Name = c.Event.Event_Name,
+                    Event_Poster = c.Event.Event_Poster,
+                    Event_Discount = c.Event.Event_Discount,
+                    Event_Start = c.Event.Event_Start,
+                    Event_End = c.Event.Event_End,
+                    Event_Voucher = c.Event.Event_Voucher,
                 });
                 return Ok(PerfumesDTO);
             }

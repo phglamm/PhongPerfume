@@ -19,6 +19,8 @@ import uploadFile from "../../../Components/Utils/uploadAppwrite";
 import api from "../../../Config/api";
 export default function PerfumeManagement() {
   const [perfumes, setPerfumes] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [events, setEvents] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -28,6 +30,20 @@ export default function PerfumeManagement() {
       console.log(response.data);
     }
     fetchPerfume();
+
+    async function fetchBrand() {
+      const response = await api.get("Brand");
+      setBrands(response.data);
+      console.log(response.data);
+    }
+    fetchBrand();
+
+    async function fetchEvent() {
+      const response = await api.get("Event");
+      setEvents(response.data);
+      console.log(response.data);
+    }
+    fetchEvent();
   }, []);
   const [isModalAddOpen, setisModalAddOpen] = useState(false);
   const [formAdd] = Form.useForm();
@@ -471,7 +487,23 @@ export default function PerfumeManagement() {
             label="Brand ID"
             rules={[{ required: true, message: "Please select the brand ID" }]}
           >
-            <Input type="number" min={0} />
+            <Select placeholder="Select a brand">
+              {brands.map((brand) => (
+                <Select.Option key={brand.brand_Id} value={brand.brand_Id}>
+                  {brand.brand_Name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item name="event_Id" label="Event ID">
+            <Select placeholder="Select a event" allowClear>
+              <Select.Option value={null}>None</Select.Option>
+              {events.map((event) => (
+                <Select.Option key={event.event_Id} value={event.event_Id}>
+                  {event.event_Name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
         </Form>
       </Modal>
@@ -586,7 +618,23 @@ export default function PerfumeManagement() {
             label="Brand ID"
             rules={[{ required: true, message: "Please select the brand ID" }]}
           >
-            <Input type="number" min={0} />
+            <Select placeholder="Select a brand">
+              {brands.map((brand) => (
+                <Select.Option key={brand.brand_Id} value={brand.brand_Id}>
+                  {brand.brand_Name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item name="event_Id" label="event ID">
+            <Select placeholder="Select a event">
+              <Select.Option value={null}>None</Select.Option>
+              {events.map((event) => (
+                <Select.Option key={event.event_Id} value={event.event_Id}>
+                  {event.event_Name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
         </Form>
       </Modal>

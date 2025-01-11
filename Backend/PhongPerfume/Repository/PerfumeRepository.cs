@@ -35,7 +35,7 @@ namespace PhongPerfume.Repository
         {
             if (string.IsNullOrWhiteSpace(search))
             {
-                return await _context.Perfumes.Include(b => b.Brand).ThenInclude(p => p.Perfumes).ToListAsync();
+                return await _context.Perfumes.Include(b => b.Brand).Include(e => e.Event).ThenInclude(p => p.Perfumes).ToListAsync();
             }
             return await _context.Perfumes
                 .Include(b => b.Brand)
@@ -49,7 +49,7 @@ namespace PhongPerfume.Repository
 
         public async Task<IEnumerable<Perfume>> GetAllPerfumesAsync()
         {
-            return await _context.Perfumes.Include(b => b.Brand).ThenInclude(p => p.Perfumes).ToListAsync();
+            return await _context.Perfumes.Include(b => b.Brand).Include(e => e.Event).ThenInclude(p => p.Perfumes).ToListAsync();
         }
 
         public async Task<Perfume> GetPerfumeByIdAsync(int id)
@@ -58,9 +58,9 @@ namespace PhongPerfume.Repository
             return selectedPerfume;
         }
 
-        public async Task<Perfume> GetPerfumeWithBrandNameByIdAsync(int id)
+        public async Task<Perfume> GetPerfumeWithBrandNameEventByIdAsync(int id)
         {
-            var selectedPerfume = await _context.Perfumes.Include(b => b.Brand).FirstOrDefaultAsync(u => u.Perfume_Id == id);
+            var selectedPerfume = await _context.Perfumes.Include(b => b.Brand).Include(e => e.Event).ThenInclude(p => p.Perfumes).FirstOrDefaultAsync(u => u.Perfume_Id == id);
             return selectedPerfume;
         }
 

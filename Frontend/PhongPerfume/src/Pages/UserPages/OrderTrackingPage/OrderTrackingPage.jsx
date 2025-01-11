@@ -52,7 +52,28 @@ export default function OrderTrackingPage() {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (price) => price.toLocaleString(),
+      render: (_, record) => (
+        <>
+          {record.event_Id > 0 ? (
+            <>
+              <span className="original-price">
+                ${record.price.toLocaleString()}
+              </span>
+              <span className="sale-price">
+                $
+                {(
+                  record.price *
+                  (1 - record.event_Discount / 100)
+                ).toLocaleString()}
+              </span>
+            </>
+          ) : (
+            <span className="original-price">
+              ${record.price.toLocaleString()}
+            </span>
+          )}
+        </>
+      ),
     },
     {
       title: "Quantity",
@@ -144,14 +165,26 @@ export default function OrderTrackingPage() {
           <Col span={12}>
             <Card title="Event Information" bordered={false}>
               <p>
-                <Text strong>Event Name:</Text> {order.event_Name}
+                <Text strong>Event Name:</Text>
+                {order.orderItems?.map((oi) => (
+                  <>{" " + oi.event_Name + ""}</>
+                ))}
               </p>
             </Card>
           </Col>
           <Col span={12}>
-            <Card title="Payment Information" bordered={false}>
+            <Card title="Discount Information" bordered={false}>
               <p>
-                <Text strong>Payment Method:</Text> {order.payment_Method}
+                <Text strong>Perfume:</Text>{" "}
+                {order.orderItems?.map((oi) => (
+                  <>{" " + oi.perfume_Name + " "}</>
+                ))}
+              </p>
+              <p>
+                <Text strong>Discount Rate:</Text>{" "}
+                {order.orderItems?.map((oi) => (
+                  <>{" " + oi.event_Discount + "% "}</>
+                ))}
               </p>
             </Card>
           </Col>
@@ -160,10 +193,17 @@ export default function OrderTrackingPage() {
         <Divider />
 
         <Row gutter={[16, 16]}>
-          <Col span={24}>
+          <Col span={12}>
             <Card title="Warranty Information" bordered={false}>
               <p>
                 <Text strong>Warranty Name:</Text> {order.warranty_Name}
+              </p>
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card title="Payment Information" bordered={false}>
+              <p>
+                <Text strong>Payment Method:</Text> {order.payment_Method}
               </p>
             </Card>
           </Col>

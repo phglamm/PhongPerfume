@@ -1,23 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PhongPerfume.DTO.OrderDTO;
-using PhongPerfume.DTO.OrderItemsDTO;
-using PhongPerfume.Interface;
-using PhongPerfume.Models;
-
-namespace PhongPerfume.Controllers
+﻿namespace PhongPerfume.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using PhongPerfume.DTO.OrderDTO;
+    using PhongPerfume.DTO.OrderItemsDTO;
+    using PhongPerfume.Interface;
+    using PhongPerfume.Models;
+
+    /// <summary>
+    /// Defines the <see cref="OrderController" />
+    /// </summary>
     [Route("api/[Controller]")]
     [ApiController]
     public class OrderController : Controller
     {
+        /// <summary>
+        /// Defines the _orderRepository
+        /// </summary>
         private readonly IOrderRepository _orderRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderController"/> class.
+        /// </summary>
+        /// <param name="orderRepository">The orderRepository<see cref="IOrderRepository"/></param>
         public OrderController(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
 
-
+        /// <summary>
+        /// The GetAllOrder
+        /// </summary>
+        /// <returns>The <see cref="Task{ActionResult{IEnumerable{OrderGetAll}}}"/></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderGetAll>>> GetAllOrder()
         {
@@ -45,8 +58,7 @@ namespace PhongPerfume.Controllers
                     Reward_point = o.User.Reward_point,
                     Role = o.User.Role,
                 },
-                Event_Id = o.Event_Id,
-                Event_Name = o.Event.Event_Name,
+
                 Payment_Id = o.Payment_Id,
                 Payment_Method = o.Payment.Payment_Method,
                 Warranty_Id = o.Warranty_Id,
@@ -65,13 +77,24 @@ namespace PhongPerfume.Controllers
                     Price = oi.Perfume.Price,
                     Brand_Id = oi.Perfume.Brand_Id,
                     Brand_Name = oi.Perfume.Brand.Brand_Name,
-                    Quantity = oi.Quantity
+                    Quantity = oi.Quantity,
+                    Event_Id = oi.Perfume.Event?.Event_Id,
+                    Event_Name = oi.Perfume.Event?.Event_Name,
+                    Event_Poster = oi.Perfume.Event?.Event_Poster,
+                    Event_Discount = oi.Perfume.Event?.Event_Discount,
+                    Event_Start = oi.Perfume.Event?.Event_Start,
+                    Event_End = oi.Perfume.Event?.Event_End,
+                    Event_Voucher = oi.Perfume.Event?.Event_Voucher
                 }).ToList(),
             });
             return Ok(OrdersDTO);
         }
 
-
+        /// <summary>
+        /// The GetAllOrderFromUser
+        /// </summary>
+        /// <param name="userID">The userID<see cref="int"/></param>
+        /// <returns>The <see cref="Task{ActionResult{IEnumerable{OrderGetAll}}}"/></returns>
         [HttpGet("OrderFromUser/{userID}")]
         public async Task<ActionResult<IEnumerable<OrderGetAll>>> GetAllOrderFromUser(int userID)
         {
@@ -99,8 +122,7 @@ namespace PhongPerfume.Controllers
                     Reward_point = o.User.Reward_point,
                     Role = o.User.Role,
                 },
-                Event_Id = o.Event_Id,
-                Event_Name = o.Event.Event_Name,
+
                 Payment_Id = o.Payment_Id,
                 Payment_Method = o.Payment.Payment_Method,
                 Warranty_Id = o.Warranty_Id,
@@ -119,12 +141,24 @@ namespace PhongPerfume.Controllers
                     Price = oi.Perfume.Price,
                     Brand_Id = oi.Perfume.Brand_Id,
                     Brand_Name = oi.Perfume.Brand.Brand_Name,
-                    Quantity = oi.Quantity
+                    Quantity = oi.Quantity,
+                    Event_Id = oi.Perfume.Event?.Event_Id,
+                    Event_Name = oi.Perfume.Event?.Event_Name,
+                    Event_Poster = oi.Perfume.Event?.Event_Poster,
+                    Event_Discount = oi.Perfume.Event?.Event_Discount,
+                    Event_Start = oi.Perfume.Event?.Event_Start,
+                    Event_End = oi.Perfume.Event?.Event_End,
+                    Event_Voucher = oi.Perfume.Event?.Event_Voucher
                 }).ToList(),
             });
             return Ok(OrdersDTO);
         }
 
+        /// <summary>
+        /// The GetOrderById
+        /// </summary>
+        /// <param name="id">The id<see cref="int"/></param>
+        /// <returns>The <see cref="Task{ActionResult{OrderGetAll}}"/></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderGetAll>> GetOrderById(int id)
         {
@@ -158,8 +192,6 @@ namespace PhongPerfume.Controllers
                     Reward_point = selectedOrder.User.Reward_point,
                     Role = selectedOrder.User.Role,
                 },
-                Event_Id = selectedOrder.Event_Id,
-                Event_Name = selectedOrder.Event.Event_Name,
                 Payment_Id = selectedOrder.Payment_Id,
                 Payment_Method = selectedOrder.Payment.Payment_Method,
                 Warranty_Id = selectedOrder.Warranty_Id,
@@ -178,12 +210,24 @@ namespace PhongPerfume.Controllers
                     Price = oi.Perfume.Price,
                     Brand_Id = oi.Perfume.Brand_Id,
                     Brand_Name = oi.Perfume.Brand.Brand_Name,
-                    Quantity = oi.Quantity
+                    Quantity = oi.Quantity,
+                    Event_Id = oi.Perfume.Event?.Event_Id,
+                    Event_Name = oi.Perfume.Event?.Event_Name,
+                    Event_Poster = oi.Perfume.Event?.Event_Poster,
+                    Event_Discount = oi.Perfume.Event?.Event_Discount,
+                    Event_Start = oi.Perfume.Event?.Event_Start,
+                    Event_End = oi.Perfume.Event?.Event_End,
+                    Event_Voucher = oi.Perfume.Event?.Event_Voucher
                 }).ToList(),
             };
             return Ok(selectedOrderDTO);
         }
 
+        /// <summary>
+        /// The AddOrder
+        /// </summary>
+        /// <param name="orderPost">The orderPost<see cref="OrderPost"/></param>
+        /// <returns>The <see cref="Task{ActionResult{OrderGetAll}}"/></returns>
         [HttpPost]
         public async Task<ActionResult<OrderGetAll>> AddOrder([FromBody] OrderPost orderPost)
         {
@@ -202,7 +246,6 @@ namespace PhongPerfume.Controllers
                 Order_Status = orderPost.Order_Status,
                 Total_Price = orderPost.Total_Price,
                 User_Id = orderPost.User_Id,
-                Event_Id = orderPost.Event_Id,
                 Payment_Id = orderPost.Payment_Id,
                 Warranty_Id = orderPost.Warranty_Id,
                 OrderItems = orderPost.OrderItems.Select(oi => new OrderItems
@@ -242,8 +285,7 @@ namespace PhongPerfume.Controllers
                     Reward_point = addedOrder.User.Reward_point,
                     Role = addedOrder.User.Role,
                 },
-                Event_Id = addedOrder.Event_Id,
-                Event_Name = addedOrder.Event.Event_Name,
+
                 Payment_Id = addedOrder.Payment_Id,
                 Payment_Method = addedOrder.Payment.Payment_Method,
                 Warranty_Id = addedOrder.Warranty_Id,
@@ -262,15 +304,27 @@ namespace PhongPerfume.Controllers
                     Price = oi.Perfume.Price,
                     Brand_Id = oi.Perfume.Brand_Id,
                     Brand_Name = oi.Perfume.Brand.Brand_Name,
-                    Quantity = oi.Quantity
+                    Quantity = oi.Quantity,
+                    Event_Id = oi.Perfume.Event?.Event_Id,
+                    Event_Name = oi.Perfume.Event?.Event_Name,
+                    Event_Poster = oi.Perfume.Event?.Event_Poster,
+                    Event_Discount = oi.Perfume.Event?.Event_Discount,
+                    Event_Start = oi.Perfume.Event?.Event_Start,
+                    Event_End = oi.Perfume.Event?.Event_End,
+                    Event_Voucher = oi.Perfume.Event?.Event_Voucher
                 }).ToList(),
             };
 
             System.Diagnostics.Debug.WriteLine($"{AfterAddOrder.Order_Id}");
             return CreatedAtAction(nameof(GetOrderById), new { id = AfterAddOrder.Order_Id }, AfterAddOrder);
-
         }
 
+        /// <summary>
+        /// The UpdateOrder
+        /// </summary>
+        /// <param name="id">The id<see cref="int"/></param>
+        /// <param name="orderPost">The orderPost<see cref="OrderPost"/></param>
+        /// <returns>The <see cref="Task{ActionResult{Order}}"/></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult<Order>> UpdateOrder(int id, [FromBody] OrderPost orderPost)
         {
@@ -288,15 +342,18 @@ namespace PhongPerfume.Controllers
             ToUpdateOrder.Order_Status = orderPost.Order_Status;
             ToUpdateOrder.Total_Price = orderPost.Total_Price;
             ToUpdateOrder.User_Id = orderPost.User_Id;
-            ToUpdateOrder.Event_Id = orderPost.Event_Id;
             ToUpdateOrder.Payment_Id = orderPost.Payment_Id;
             ToUpdateOrder.Warranty_Id = orderPost.Warranty_Id;
-
 
             var UpdatedOrder = await _orderRepository.UpdateOrderAsync(ToUpdateOrder);
             return Ok(UpdatedOrder);
         }
 
+        /// <summary>
+        /// The DeleteOrder
+        /// </summary>
+        /// <param name="id">The id<see cref="int"/></param>
+        /// <returns>The <see cref="Task{ActionResult}"/></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteOrder(int id)
         {
@@ -309,6 +366,12 @@ namespace PhongPerfume.Controllers
             return Ok("Delete Successfully");
         }
 
+        /// <summary>
+        /// The UpdateOrderStatus
+        /// </summary>
+        /// <param name="id">The id<see cref="int"/></param>
+        /// <param name="updateorderstatus">The updateorderstatus<see cref="string"/></param>
+        /// <returns>The <see cref="Task{ActionResult{OrderGetAll}}"/></returns>
         [HttpPut("UpdateOrderStatus/{id}")]
         public async Task<ActionResult<OrderGetAll>> UpdateOrderStatus(int id, [FromQuery] string updateorderstatus)
         {
@@ -350,8 +413,6 @@ namespace PhongPerfume.Controllers
                     Reward_point = UpdatedOrder.User.Reward_point,
                     Role = UpdatedOrder.User.Role,
                 },
-                Event_Id = UpdatedOrder.Event_Id,
-                Event_Name = UpdatedOrder.Event.Event_Name,
                 Payment_Id = UpdatedOrder.Payment_Id,
                 Payment_Method = UpdatedOrder.Payment.Payment_Method,
                 Warranty_Id = UpdatedOrder.Warranty_Id,
@@ -370,6 +431,13 @@ namespace PhongPerfume.Controllers
                     Price = oi.Perfume.Price,
                     Brand_Id = oi.Perfume.Brand_Id,
                     Brand_Name = oi.Perfume.Brand.Brand_Name,
+                    Event_Id = oi.Perfume.Event?.Event_Id,
+                    Event_Name = oi.Perfume.Event?.Event_Name,
+                    Event_Poster = oi.Perfume.Event?.Event_Poster,
+                    Event_Discount = oi.Perfume.Event?.Event_Discount,
+                    Event_Start = oi.Perfume.Event?.Event_Start,
+                    Event_End = oi.Perfume.Event?.Event_End,
+                    Event_Voucher = oi.Perfume.Event?.Event_Voucher,
                     Quantity = oi.Quantity
                 }).ToList(),
             };

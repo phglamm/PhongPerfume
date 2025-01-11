@@ -87,7 +87,26 @@ export default function Homepage() {
               >
                 <Card.Meta
                   title={perfume.perfume_Name}
-                  description={`$${perfume.price.toLocaleString()}`}
+                  description={
+                    perfume.event_Id > 0 ? (
+                      <>
+                        <span className="original-price">
+                          ${perfume.price.toLocaleString()}
+                        </span>
+                        <span className="sale-price">
+                          $
+                          {(
+                            perfume.price *
+                            (1 - perfume.event_Discount / 100)
+                          ).toLocaleString()}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="original-price">
+                        ${perfume.price.toLocaleString()}
+                      </span>
+                    )
+                  }
                 />
               </Card>
             </Link>

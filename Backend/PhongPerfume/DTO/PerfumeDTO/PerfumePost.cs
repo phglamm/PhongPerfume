@@ -12,7 +12,10 @@
         public int Stocks { get; set; }
         public decimal Price { get; set; }
         public int Brand_Id { get; set; }
+        //public string Brand_Name { get; set; }
         //public Brand Brand { get; set; }
         //public ICollection<OrderDetailPerfume> OrderDetailPerfumes { get; set; }
+        public int? Event_Id { get; set; }
+        //public string Event_Name { get; set; }
     }
 }

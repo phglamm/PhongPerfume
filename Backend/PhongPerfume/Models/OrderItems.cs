@@ -15,6 +15,8 @@ namespace PhongPerfume.Models
 
         [ForeignKey("Perfume_Id")]
         public Perfume Perfume { get; set; }
+
+        public float OrderItems_price { get; set; }
         public int Quantity { get; set; }
 
     }

@@ -24,7 +24,6 @@ namespace PhongPerfume.Repository
 
             return await _context.Orders
        .Include(o => o.User)
-       .Include(o => o.Event)
        .Include(o => o.Payment)
        .Include(o => o.Warranty)
        .Include(o => o.OrderItems)
@@ -48,28 +47,32 @@ namespace PhongPerfume.Repository
         public async Task<IEnumerable<Order>> GetAllOrdersAsync()
         {
             return await _context.Orders
-                .Include(e => e.Event)
-                .Include(w => w.Warranty)
-                .Include(p => p.Payment)
-                .Include(u => u.User)
-                .Include(oi => oi.OrderItems)
-                .ThenInclude(p => p.Perfume)
-                .ThenInclude(b => b.Brand)
+                .Include(w => w.Warranty)            // Include Warranty
+                .Include(p => p.Payment)             // Include Payment
+                .Include(u => u.User)                // Include User
+                .Include(o => o.OrderItems)          // Include OrderItems
+                    .ThenInclude(oi => oi.Perfume)   // Include Perfume in OrderItems
+                        .ThenInclude(p => p.Brand)   // Include Brand in Perfume
+                .Include(o => o.OrderItems)          // Include OrderItems again
+                    .ThenInclude(oi => oi.Perfume)   // Include Perfume in OrderItems
+                        .ThenInclude(p => p.Event)   // Include Event in Perfume
                 .ToListAsync();
-
         }
+
 
         public async Task<IEnumerable<Order>> GetAllOrdersFromUserAsync(int userID)
         {
             return await _context.Orders
                 .Where(o => o.User_Id == userID)
                 .Include(u => u.User)
-                .Include(e => e.Event)
                 .Include(w => w.Warranty)
                 .Include(p => p.Payment)
-                .Include(oi => oi.OrderItems)
-                .ThenInclude(p => p.Perfume)
-                .ThenInclude(b => b.Brand)
+                .Include(o => o.OrderItems)          // Include OrderItems
+                    .ThenInclude(oi => oi.Perfume)   // Include Perfume in OrderItems
+                        .ThenInclude(p => p.Brand)   // Include Brand in Perfume
+                .Include(o => o.OrderItems)          // Include OrderItems again
+                    .ThenInclude(oi => oi.Perfume)   // Include Perfume in OrderItems
+                        .ThenInclude(p => p.Event)   // Include Event in Perfume
                 .ToListAsync();
         }
 
@@ -77,12 +80,14 @@ namespace PhongPerfume.Repository
         {
             var selectedOrder = await _context.Orders
                 .Include(u => u.User)
-                .Include(e => e.Event)
                 .Include(w => w.Warranty)
                 .Include(p => p.Payment)
-                .Include(oi => oi.OrderItems)
-                .ThenInclude(p => p.Perfume)
-                .ThenInclude(b => b.Brand)
+                .Include(o => o.OrderItems)          // Include OrderItems
+                    .ThenInclude(oi => oi.Perfume)   // Include Perfume in OrderItems
+                        .ThenInclude(p => p.Brand)   // Include Brand in Perfume
+                .Include(o => o.OrderItems)          // Include OrderItems again
+                    .ThenInclude(oi => oi.Perfume)   // Include Perfume in OrderItems
+                        .ThenInclude(p => p.Event)   // Include Event in Perfume
                 .FirstOrDefaultAsync(o => o.Order_Id == id);
             return selectedOrder;
         }
@@ -92,13 +97,15 @@ namespace PhongPerfume.Repository
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
             return await _context.Orders
-        .Include(o => o.User)
-        .Include(o => o.Event)
-        .Include(o => o.Payment)
-        .Include(o => o.Warranty)
-        .Include(o => o.OrderItems)
-        .ThenInclude(oi => oi.Perfume)
-        .ThenInclude(p => p.Brand)
+            .Include(o => o.User)
+            .Include(o => o.Payment)
+            .Include(o => o.Warranty)
+            .Include(o => o.OrderItems)          // Include OrderItems
+            .ThenInclude(oi => oi.Perfume)   // Include Perfume in OrderItems
+            .ThenInclude(p => p.Brand)   // Include Brand in Perfume
+            .Include(o => o.OrderItems)          // Include OrderItems again
+            .ThenInclude(oi => oi.Perfume)   // Include Perfume in OrderItems
+            .ThenInclude(p => p.Event)   // Include Event in Perfume
         .FirstOrDefaultAsync(o => o.Order_Id == order.Order_Id);
         }
     }

@@ -31,10 +31,15 @@ export default function CheckoutPage() {
 
   const cartItems = useSelector(selectCartItems);
   const user = useSelector(selectUser);
-  const totalAmount = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+
+  const totalAmount = cartItems.reduce((acc, item) => {
+    const itemPrice =
+      item.event_Id > 0
+        ? item.price * (1 - item.event_Discount / 100)
+        : item.price; // Use the sale price if there's an event discount, else use the original price
+
+    return acc + itemPrice * item.quantity;
+  }, 0);
 
   const next = () => {
     setCurrentStep(currentStep + 1);
@@ -51,14 +56,13 @@ export default function CheckoutPage() {
     values.order_Status = "Pending";
     values.total_Price = totalAmount;
     values.user_Id = user.user_Id;
-    values.event_Id = 1;
     values.payment_Id = 1;
     values.warranty_Id = 1;
     values.orderItems = cartItems;
     console.log(values);
     try {
       const response = await api.post("Order", values);
-      console.log(response);
+      console.log(response.data);
       dispatch(order(response.data));
       navigate(`/${user?.username}/${route.ordersuccess}`);
       dispatch(clearCart());
@@ -119,14 +123,26 @@ export default function CheckoutPage() {
                           <Text type="secondary">Brand: {item.brand_Name}</Text>
                           <Text>Size: {item.size}ml</Text>
                           <Text strong>
-                            Price: ${item.price.toLocaleString()}
+                            Price: $
+                            {item.event_Id > 0
+                              ? (
+                                  item.price *
+                                  (1 - item.event_Discount / 100)
+                                ).toLocaleString()
+                              : item.price.toLocaleString()}
                           </Text>
                           <Text>Quantity: {item.quantity}</Text>
                         </Space>
                       </Col>
                       <Col span={6} style={{ textAlign: "right" }}>
                         <Title level={4} style={{ marginTop: "15px" }}>
-                          ${(item.price * item.quantity).toLocaleString()}
+                          ${" "}
+                          {item.event_Id > 0
+                            ? (
+                                item.price *
+                                (1 - item.event_Discount / 100)
+                              ).toLocaleString()
+                            : item.price.toLocaleString()}
                         </Title>
                       </Col>
                     </Row>

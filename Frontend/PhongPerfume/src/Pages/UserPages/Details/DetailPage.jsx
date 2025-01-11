@@ -115,7 +115,24 @@ export default function DetailPage() {
                 <Col span={12}>
                   <Text strong>Price:</Text>
                   <p style={{ color: "#d4380d", fontSize: "18px" }}>
-                    ${perfume.price.toLocaleString()}
+                    {perfume.event_Id > 0 ? (
+                      <>
+                        <span className="original-price">
+                          ${perfume.price.toLocaleString()}
+                        </span>
+                        <span className="sale-price">
+                          $
+                          {(
+                            perfume.price *
+                            (1 - perfume.event_Discount / 100)
+                          ).toLocaleString()}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="original-price">
+                        ${perfume.price.toLocaleString()}
+                      </span>
+                    )}
                   </p>
                 </Col>
                 <Col span={12}>

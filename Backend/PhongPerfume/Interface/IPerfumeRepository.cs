@@ -7,7 +7,7 @@ namespace PhongPerfume.Interface
 
         Task<IEnumerable<Perfume>> GetAllPerfumesAsync();
         Task<Perfume> GetPerfumeByIdAsync(int id);
-        Task<Perfume> GetPerfumeWithBrandNameByIdAsync(int id);
+        Task<Perfume> GetPerfumeWithBrandNameEventByIdAsync(int id);
         Task<Perfume> AddPerfumeAsync(Perfume perfume);
         Task<Perfume> UpdatePerfumeAsync(Perfume perfume);
         Task DeletePerfumeAsync(int id);

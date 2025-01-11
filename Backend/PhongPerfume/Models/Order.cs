@@ -13,15 +13,11 @@ namespace PhongPerfume.Models
         public string Order_customerPhone { get; set; }
         public string Order_Address { get; set; }
         public string Order_Status { get; set; }
-        public int Total_Price { get; set; }
+        public float Total_Price { get; set; }
 
         public int User_Id { get; set; }
         [ForeignKey("User_Id")]
         public User User { get; set; }
-
-        public int Event_Id { get; set; }
-        [ForeignKey("Event_Id")]
-        public Event Event { get; set; }
 
         public int Payment_Id { get; set; }
         [ForeignKey("Payment_Id")]

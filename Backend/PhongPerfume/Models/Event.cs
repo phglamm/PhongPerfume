@@ -13,7 +13,7 @@ namespace PhongPerfume.Models
         public string Event_Voucher { get; set; }
         public int Event_Discount { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Perfume> Perfumes { get; set; }
 
 
 

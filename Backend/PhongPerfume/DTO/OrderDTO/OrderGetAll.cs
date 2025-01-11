@@ -11,12 +11,10 @@ namespace PhongPerfume.DTO.OrderDTO
         public string Order_customerPhone { get; set; }
         public string Order_Address { get; set; }
         public string Order_Status { get; set; }
-        public int Total_Price { get; set; }
+        public float Total_Price { get; set; }
         public int User_Id { get; set; }
         public OrderUserReturnDTO User { get; set; }
 
-        public int Event_Id { get; set; }
-        public string Event_Name { get; set; }
 
         public int Payment_Id { get; set; }
         public string Payment_Method { get; set; }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PhongPerfume.Data;
@@ -12,9 +13,11 @@ using PhongPerfume.Data;
 namespace PhongPerfume.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250110110332_updte event to perfume")]
+    partial class updteeventtoperfume
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,8 +119,8 @@ namespace PhongPerfume.Migrations
                     b.Property<int>("Payment_Id")
                         .HasColumnType("integer");
 
-                    b.Property<float>("Total_Price")
-                        .HasColumnType("real");
+                    b.Property<int>("Total_Price")
+                        .HasColumnType("integer");
 
                     b.Property<int>("User_Id")
                         .HasColumnType("integer");
@@ -185,7 +188,7 @@ namespace PhongPerfume.Migrations
                     b.Property<int>("Brand_Id")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Event_Id")
+                    b.Property<int>("Event_Id")
                         .HasColumnType("integer");
 
                     b.Property<string>("Perfume_Description")
@@ -359,7 +362,9 @@ namespace PhongPerfume.Migrations
 
                     b.HasOne("PhongPerfume.Models.Event", "Event")
                         .WithMany("Perfumes")
-                        .HasForeignKey("Event_Id");
+                        .HasForeignKey("Event_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Brand");
 

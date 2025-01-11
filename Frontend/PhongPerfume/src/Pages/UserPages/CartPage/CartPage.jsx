@@ -20,10 +20,14 @@ export default function CartPage() {
   const cartItems = useSelector(selectCartItems);
   const user = useSelector(selectUser);
   const navigate = useNavigate();
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
+  const totalPrice = cartItems.reduce((acc, item) => {
+    const itemPrice =
+      item.event_Id > 0
+        ? item.price * (1 - item.event_Discount / 100)
+        : item.price; // Use the sale price if there's an event discount, else use the original price
+
+    return acc + itemPrice * item.quantity;
+  }, 0);
 
   const columns = [
     {
@@ -48,7 +52,28 @@ export default function CartPage() {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (price) => `$${price.toLocaleString()}`,
+      render: (_, record) => (
+        <>
+          {record.event_Id > 0 ? (
+            <>
+              <span className="original-price">
+                ${record.price.toLocaleString()}
+              </span>
+              <span className="sale-price">
+                $
+                {(
+                  record.price *
+                  (1 - record.event_Discount / 100)
+                ).toLocaleString()}
+              </span>
+            </>
+          ) : (
+            <span className="original-price">
+              ${record.price.toLocaleString()}
+            </span>
+          )}
+        </>
+      ),
     },
     {
       title: "Quantity",
@@ -80,8 +105,14 @@ export default function CartPage() {
     {
       title: "Subtotal",
       key: "subtotal",
-      render: (_, record) =>
-        `$${(record.price * record.quantity).toLocaleString()}`,
+      render: (_, record) => {
+        const itemPrice =
+          record.event_Id > 0
+            ? record.price * (1 - record.event_Discount / 100)
+            : record.price;
+
+        return `$${(itemPrice * record.quantity).toLocaleString()}`;
+      },
     },
     {
       title: "Action",
